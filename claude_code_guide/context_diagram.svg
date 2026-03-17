@@ -1,0 +1,199 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" xmlns="http://www.w3.org/2000/svg">
+<rect width="1200" height="720" fill="white"/>
+<defs>
+  <filter id="shadow">
+    <feDropShadow dx="0" dy="2" stdDeviation="5" flood-color="#00000018"/>
+  </filter>
+  <filter id="shadow-sm">
+    <feDropShadow dx="0" dy="1" stdDeviation="3" flood-color="#00000012"/>
+  </filter>
+  <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#8899bb"/>
+  </marker>
+  <marker id="arr-orange" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#d08020"/>
+  </marker>
+</defs>
+
+<!-- 白底 -->
+<rect width="1200" height="720" fill="#fff" rx="14"/>
+
+<!-- 标题 -->
+<text x="600" y="38" text-anchor="middle" font-size="22" font-weight="bold" fill="#1a2a4a">/context — 上下文用量解读</text>
+<text x="600" y="60" text-anchor="middle" font-size="12" fill="#7788aa">了解 200k token 窗口里装了什么 · 接续 knowledge_diagram 的三层知识体系</text>
+
+<!-- 关联标签 -->
+<rect x="18" y="14" width="172" height="24" rx="5" fill="#fff8ee" stroke="#e8c060" stroke-width="1.2"/>
+<text x="104" y="30" text-anchor="middle" font-size="10" fill="#aa6600">📎 接续：知识架构图</text>
+
+<!-- ══════════════════════════════════════
+     左侧：/context 终端输出模拟
+     x=30~480  y=80~580
+     ══════════════════════════════════════ -->
+<rect x="30" y="78" width="460" height="520" rx="10" fill="#1a1e2e" filter="url(#shadow)"/>
+<!-- 终端顶栏 -->
+<rect x="30" y="78" width="460" height="28" rx="10" fill="#2a2e3e"/>
+<rect x="30" y="92" width="460" height="14" fill="#2a2e3e"/>
+<circle cx="52" cy="92" r="6" fill="#ff5f57"/>
+<circle cx="72" cy="92" r="6" fill="#febc2e"/>
+<circle cx="92" cy="92" r="6" fill="#28c840"/>
+<text x="260" y="96" text-anchor="middle" font-size="10" fill="#8899aa">terminal</text>
+
+<!-- 命令行 -->
+<text x="48" y="126" font-size="11" fill="#50d0a0" font-family="monospace">$ /context</text>
+
+<!-- 标题行 -->
+<text x="48" y="150" font-size="11" font-weight="bold" fill="#ffffff" font-family="monospace">Context Usage</text>
+
+<!-- token bar 图形 -->
+<text x="48" y="172" font-size="10" fill="#6688aa" font-family="monospace">⛁ ⛁ ⛁ ⛁ ⛁ ⛁ ⛁ ⛁ ⛁ ⛁</text>
+<text x="48" y="188" font-size="10" fill="#6688aa" font-family="monospace">⛁ ⛁ ⛁ ⛁ ⛁ ⛁ ⛁ ⛁ ⛁ ⛁</text>
+<text x="48" y="204" font-size="10" fill="#6688aa" font-family="monospace">⛁ ⛁ ⛁ ⛁ ⛁ ⛁ ⛁ ⛀ ⛁ ⛁</text>
+<text x="300" y="172" font-size="10" fill="#aabbcc" font-family="monospace">claude-sonnet-4-6</text>
+<text x="300" y="188" font-size="10" fill="#aabbcc" font-family="monospace">70k / 200k tokens (35%)</text>
+
+<!-- 分类明细 -->
+<text x="48" y="232" font-size="10" fill="#aaaaaa" font-family="monospace">Estimated usage by category</text>
+
+<!-- System prompt -->
+<rect x="48" y="242" width="10" height="10" rx="2" fill="#8899bb"/>
+<text x="64" y="252" font-size="10" fill="#ccddee" font-family="monospace">System prompt:   27.6k (13.8%)</text>
+
+<!-- System tools -->
+<rect x="48" y="260" width="10" height="10" rx="2" fill="#8899bb"/>
+<text x="64" y="270" font-size="10" fill="#ccddee" font-family="monospace">System tools:    22.7k (11.4%)</text>
+
+<!-- MCP tools -->
+<rect x="48" y="278" width="10" height="10" rx="2" fill="#2299cc"/>
+<text x="64" y="288" font-size="10" fill="#ccddee" font-family="monospace">MCP tools:        2.7k  (1.3%)</text>
+
+<!-- Memory files -->
+<rect x="48" y="296" width="10" height="10" rx="2" fill="#cc7744"/>
+<text x="64" y="306" font-size="10" fill="#ccddee" font-family="monospace">Memory files:     2.7k  (1.4%)</text>
+
+<!-- Skills -->
+<rect x="48" y="314" width="10" height="10" rx="2" fill="#ccaa00"/>
+<text x="64" y="324" font-size="10" fill="#ccddee" font-family="monospace">Skills:            247   (0.1%)</text>
+
+<!-- Messages -->
+<rect x="48" y="332" width="10" height="10" rx="2" fill="#9944ee"/>
+<text x="64" y="342" font-size="10" fill="#ccddee" font-family="monospace">Messages:        58.3k (29.2%)</text>
+
+<!-- Free space -->
+<rect x="48" y="350" width="10" height="10" rx="2" fill="#334455" stroke="#556677" stroke-width="1"/>
+<text x="64" y="360" font-size="10" fill="#778899" font-family="monospace">Free space:        53k (26.3%)</text>
+
+<!-- Autocompact -->
+<text x="64" y="378" font-size="10" fill="#556677" font-family="monospace">Autocompact buffer: 33k (16.5%)</text>
+
+<!-- 分隔 -->
+<line x1="48" y1="392" x2="460" y2="392" stroke="#334455" stroke-width="1"/>
+
+<!-- MCP tools detail -->
+<text x="48" y="410" font-size="10" font-weight="bold" fill="#ffffff" font-family="monospace">MCP tools</text>
+<text x="48" y="428" font-size="10" fill="#778899" font-family="monospace">└ getDiagnostics:   942 tokens</text>
+<text x="48" y="444" font-size="10" fill="#778899" font-family="monospace">└ executeCode:     1.8k tokens</text>
+
+<!-- Memory files detail -->
+<text x="48" y="466" font-size="10" font-weight="bold" fill="#ffffff" font-family="monospace">Memory files</text>
+<text x="48" y="484" font-size="10" fill="#778899" font-family="monospace">└ CLAUDE.md:       2.7k tokens</text>
+
+<!-- Suggestions -->
+<text x="48" y="506" font-size="10" font-weight="bold" fill="#ffffff" font-family="monospace">Suggestions</text>
+<text x="48" y="524" font-size="10" fill="#5599ff" font-family="monospace">ℹ File reads using 15k tokens (7%)</text>
+<text x="64" y="540" font-size="9" fill="#778899" font-family="monospace">→ save ~4.5k</text>
+<text x="64" y="556" font-size="9" fill="#556677" font-family="monospace">Use offset/limit for large files.</text>
+
+<!-- ══════════════════════════════════════
+     中间箭头
+     ══════════════════════════════════════ -->
+<line x1="492" y1="360" x2="528" y2="360" stroke="#8899bb" stroke-width="2" marker-end="url(#arr)"/>
+<text x="510" y="352" text-anchor="middle" font-size="9" fill="#8899bb">解读</text>
+
+<!-- ══════════════════════════════════════
+     右侧：各分类解读卡片
+     x=535~1170  y=80~620
+     ══════════════════════════════════════ -->
+
+<!-- 总览 bar -->
+<rect x="535" y="80" width="635" height="52" rx="8" fill="#1a2a4a" filter="url(#shadow)"/>
+<text x="852" y="102" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">200k token 窗口</text>
+<!-- bar segments -->
+<rect x="545" y="112" width="78" height="12" rx="2" fill="#8899bb"/>
+<rect x="625" y="112" width="68" height="12" rx="2" fill="#8899bb" opacity="0.7"/>
+<rect x="695" y="112" width="8"  height="12" rx="2" fill="#2299cc"/>
+<rect x="705" y="112" width="8"  height="12" rx="2" fill="#cc7744"/>
+<rect x="715" y="112" width="2"  height="12" rx="2" fill="#ccaa00"/>
+<rect x="719" y="112" width="175" height="12" rx="2" fill="#9944ee"/>
+<rect x="896" y="112" width="159" height="12" rx="2" fill="#2a3a4a" stroke="#445566" stroke-width="1"/>
+<text x="976" y="122" text-anchor="middle" font-size="8" fill="#556677">Free 26%</text>
+
+<!-- 卡片1: System prompt -->
+<rect x="535" y="148" width="300" height="88" rx="8" fill="#eef2ff" stroke="#8899bb" stroke-width="1.5" filter="url(#shadow-sm)"/>
+<rect x="535" y="148" width="300" height="28" rx="8" fill="#8899bb"/>
+<rect x="535" y="162" width="300" height="14" fill="#8899bb"/>
+<text x="685" y="167" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">⚙ System prompt  27.6k</text>
+<text x="685" y="192" text-anchor="middle" font-size="10" fill="#3a4a7a">Claude Code 内置指令 + 工具描述</text>
+<text x="685" y="210" text-anchor="middle" font-size="10" fill="#3a4a7a">每次对话自动注入，不可见</text>
+<text x="685" y="226" text-anchor="middle" font-size="9" fill="#6677aa">→ 对应 knowledge 图：系统层</text>
+
+<!-- 卡片2: System tools -->
+<rect x="845" y="148" width="300" height="88" rx="8" fill="#eef2ff" stroke="#8899bb" stroke-width="1.5" filter="url(#shadow-sm)"/>
+<rect x="845" y="148" width="300" height="28" rx="8" fill="#8899bb"/>
+<rect x="845" y="162" width="300" height="14" fill="#8899bb"/>
+<text x="995" y="167" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">🔧 System tools  22.7k</text>
+<text x="995" y="192" text-anchor="middle" font-size="10" fill="#3a4a7a">内置工具定义：Read/Edit/Bash 等</text>
+<text x="995" y="210" text-anchor="middle" font-size="10" fill="#3a4a7a">工具签名 + 说明占用大量 token</text>
+<text x="995" y="226" text-anchor="middle" font-size="9" fill="#6677aa">→ 对应 agentloop 图：tool_call 解析</text>
+
+<!-- 卡片3: MCP tools -->
+<rect x="535" y="252" width="190" height="88" rx="8" fill="#e8f6ff" stroke="#2299cc" stroke-width="1.5" filter="url(#shadow-sm)"/>
+<rect x="535" y="252" width="190" height="28" rx="8" fill="#2299cc"/>
+<rect x="535" y="266" width="190" height="14" fill="#2299cc"/>
+<text x="630" y="271" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">🔌 MCP tools  2.7k</text>
+<text x="630" y="296" text-anchor="middle" font-size="10" fill="#1a5a7a">外部 MCP 服务工具描述</text>
+<text x="630" y="314" text-anchor="middle" font-size="10" fill="#1a5a7a">getDiagnostics / executeCode</text>
+<text x="630" y="330" text-anchor="middle" font-size="9" fill="#2288aa">→ 对应 agentloop：MCP 泳道</text>
+
+<!-- 卡片4: Memory files -->
+<rect x="735" y="252" width="190" height="88" rx="8" fill="#fff4ee" stroke="#cc7744" stroke-width="1.5" filter="url(#shadow-sm)"/>
+<rect x="735" y="252" width="190" height="28" rx="8" fill="#cc7744"/>
+<rect x="735" y="266" width="190" height="14" fill="#cc7744"/>
+<text x="830" y="271" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">🧠 Memory  2.7k</text>
+<text x="830" y="296" text-anchor="middle" font-size="10" fill="#7a3a10">CLAUDE.md 项目记忆</text>
+<text x="830" y="314" text-anchor="middle" font-size="10" fill="#7a3a10">跨会话持久化知识</text>
+<text x="830" y="330" text-anchor="middle" font-size="9" fill="#aa5522">→ 对应 knowledge 图：记忆层</text>
+
+<!-- 卡片5: Skills -->
+<rect x="935" y="252" width="190" height="88" rx="8" fill="#fffbe8" stroke="#ccaa00" stroke-width="1.5" filter="url(#shadow-sm)"/>
+<rect x="935" y="252" width="190" height="28" rx="8" fill="#ccaa00"/>
+<rect x="935" y="266" width="190" height="14" fill="#ccaa00"/>
+<text x="1030" y="271" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">⚡ Skills  247</text>
+<text x="1030" y="296" text-anchor="middle" font-size="10" fill="#6a5000">斜杠命令触发的技能</text>
+<text x="1030" y="314" text-anchor="middle" font-size="10" fill="#6a5000">按需加载，极小占用</text>
+<text x="1030" y="330" text-anchor="middle" font-size="9" fill="#aa8800">→ 对应 skills_diagram</text>
+
+<!-- 卡片6: Messages -->
+<rect x="535" y="356" width="590" height="88" rx="8" fill="#f5eeff" stroke="#9944ee" stroke-width="1.5" filter="url(#shadow-sm)"/>
+<rect x="535" y="356" width="590" height="28" rx="8" fill="#9944ee"/>
+<rect x="535" y="370" width="590" height="14" fill="#9944ee"/>
+<text x="830" y="375" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">💬 Messages  58.3k  ← 最大消耗者</text>
+<text x="830" y="400" text-anchor="middle" font-size="10" fill="#4a1a7a">对话历史 + 工具调用结果 + 文件读取内容</text>
+<text x="830" y="418" text-anchor="middle" font-size="10" fill="#4a1a7a">每次 Read 文件都会追加到此处，越用越大</text>
+<text x="830" y="434" text-anchor="middle" font-size="9" fill="#7733cc">→ Suggestion: 用 offset/limit 读大文件，避免浪费</text>
+
+<!-- 卡片7: Free + Autocompact -->
+<rect x="535" y="460" width="590" height="88" rx="8" fill="#f0f4f8" stroke="#445566" stroke-width="1.5" filter="url(#shadow-sm)"/>
+<rect x="535" y="460" width="590" height="28" rx="8" fill="#334455"/>
+<rect x="535" y="474" width="590" height="14" fill="#334455"/>
+<text x="830" y="479" text-anchor="middle" font-size="11" font-weight="bold" fill="#aabbcc">⛶ Free 26%  +  ⛝ Autocompact buffer 16%</text>
+<text x="830" y="504" text-anchor="middle" font-size="10" fill="#445566">Free = 剩余可用空间，越少越危险</text>
+<text x="830" y="522" text-anchor="middle" font-size="10" fill="#445566">Autocompact = 上下文压缩缓冲区，满了自动压缩历史</text>
+<text x="830" y="540" text-anchor="middle" font-size="9" fill="#667788">→ Free 不足时 Claude 会遗忘早期对话</text>
+
+<!-- ══ 底部提示 ══ -->
+<rect x="535" y="564" width="590" height="44" rx="8" fill="#fff8ee" stroke="#e8c060" stroke-width="1.5"/>
+<text x="830" y="583" text-anchor="middle" font-size="11" font-weight="bold" fill="#aa6600">💡 最佳实践</text>
+<text x="830" y="600" text-anchor="middle" font-size="10" fill="#886600">定期 /context 检查 · 大文件用 offset/limit · 新任务开新会话</text>
+
+</svg>

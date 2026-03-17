@@ -1,0 +1,240 @@
+<svg width="1200" height="820" viewBox="0 0 1200 820" xmlns="http://www.w3.org/2000/svg">
+<rect width="1200" height="820" fill="white"/>
+<defs>
+  <filter id="sh" x="-10%" y="-10%" width="120%" height="130%">
+    <feDropShadow dx="0" dy="2" stdDeviation="5" flood-color="#00000015"/>
+  </filter>
+  <filter id="sh-sm" x="-8%" y="-8%" width="116%" height="124%">
+    <feDropShadow dx="0" dy="1" stdDeviation="3" flood-color="#00000010"/>
+  </filter>
+  <filter id="sh-md" x="-10%" y="-10%" width="120%" height="130%">
+    <feDropShadow dx="0" dy="3" stdDeviation="7" flood-color="#00000022"/>
+  </filter>
+  <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+    <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#f0f2f8" stroke-width="0.5"/>
+  </pattern>
+</defs>
+
+<rect width="1200" height="820" fill="#ffffff"/>
+<rect width="1200" height="820" fill="url(#grid)"/>
+
+<!-- TITLE -->
+<text x="600" y="38" text-anchor="middle" font-size="22" font-weight="bold" fill="#1a2a4a">Memory 层级——Claude 的六层记忆体系</text>
+<text x="600" y="60" text-anchor="middle" font-size="13" fill="#7788aa">CLAUDE.md 是你写给 Claude 的规则 · MEMORY.md 是 Claude 写给自己的笔记</text>
+<line x1="360" y1="68" x2="840" y2="68" stroke="#d0daf0" stroke-width="1"/>
+
+<!-- ===== LEFT: CLAUDE.md vs MEMORY.md ===== -->
+<rect x="18" y="76" width="370" height="732" rx="12" fill="#f8faff" stroke="#d0daf0" stroke-width="1.5" filter="url(#sh-sm)"/>
+<text x="203" y="100" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a2a4a">CLAUDE.md vs MEMORY.md</text>
+<line x1="38" y1="108" x2="370" y2="108" stroke="#d0daf0" stroke-width="1"/>
+
+<!-- CLAUDE.md card -->
+<rect x="30" y="118" width="346" height="220" rx="10" fill="#fffbf2" stroke="#f0c878" stroke-width="1.5" filter="url(#sh-sm)"/>
+<rect x="30" y="118" width="6" height="220" rx="3" fill="#f0a030"/>
+<text x="52" y="142" font-size="13" font-weight="bold" fill="#aa6600">📄  CLAUDE.md</text>
+<rect x="52" y="150" width="56" height="17" rx="5" fill="#f0a030"/>
+<text x="80" y="162" text-anchor="middle" font-size="9.5" fill="#fff" font-weight="bold">你来写</text>
+<line x1="46" y1="174" x2="368" y2="174" stroke="#f0d898" stroke-width="0.8"/>
+<text x="52" y="194" font-size="11" fill="#664400">✦  项目规范 · 编码约定 · 团队规则</text>
+<text x="52" y="214" font-size="11" fill="#664400">✦  进 git，团队所有人共享</text>
+<text x="52" y="234" font-size="11" fill="#664400">✦  每次会话全量加载到上下文</text>
+<rect x="46" y="248" width="322" height="36" rx="6" fill="#fff8e8"/>
+<text x="58" y="263" font-size="10" font-family="'Courier New',monospace" fill="#884400">Identity · Output · Quality · Boundaries · Navigation</text>
+<text x="58" y="277" font-size="10" font-family="'Courier New',monospace" fill="#aa6600">精准 &gt;&gt; 全面 — 只放模型反复出错的点</text>
+<text x="52" y="326" font-size="10.5" fill="#cc6600">→ 越长不代表越好，精简才是关键</text>
+
+<!-- MEMORY.md card -->
+<rect x="30" y="352" width="346" height="220" rx="10" fill="#f2fbf5" stroke="#80d098" stroke-width="1.5" filter="url(#sh-sm)"/>
+<rect x="30" y="352" width="6" height="220" rx="3" fill="#2a9a5a"/>
+<text x="52" y="376" font-size="13" font-weight="bold" fill="#1a6a3a">🧠  MEMORY.md</text>
+<rect x="52" y="384" width="80" height="17" rx="5" fill="#2a9a5a"/>
+<text x="92" y="396" text-anchor="middle" font-size="9.5" fill="#fff" font-weight="bold">Claude 自己写</text>
+<line x1="46" y1="408" x2="368" y2="408" stroke="#a0d8b0" stroke-width="0.8"/>
+<text x="52" y="428" font-size="11" fill="#1a4a2a">✦  调试经验 · 解决方案 · 你的偏好</text>
+<text x="52" y="448" font-size="11" fill="#1a4a2a">✦  本地私有，不进 git，自动管理</text>
+<text x="52" y="468" font-size="11" fill="#1a4a2a">✦  前 200 行常驻，主题文件按需读取</text>
+<rect x="46" y="482" width="322" height="36" rx="6" fill="#e8f8ee"/>
+<text x="58" y="497" font-size="10" font-family="'Courier New',monospace" fill="#1a4a2a">MEMORY.md  ·  hardware-insights.md</text>
+<text x="58" y="511" font-size="10" font-family="'Courier New',monospace" fill="#1a4a2a">debugging-cases.md  ·  sync-patterns.md</text>
+<text x="52" y="558" font-size="10.5" fill="#1a8a4a">→ 解决一个坑 → 自动沉淀 → 下次复用</text>
+
+<!-- Quote -->
+<rect x="30" y="588" width="346" height="108" rx="10" fill="#f0f4ff" stroke="#b0c4ee" stroke-width="1.5" filter="url(#sh-sm)"/>
+<rect x="30" y="588" width="5" height="108" rx="2" fill="#3366cc"/>
+<text x="52" y="614" font-size="10" fill="#334466" font-style="italic">"Think of CLAUDE.md as your instructions</text>
+<text x="52" y="632" font-size="10" fill="#334466" font-style="italic">to Claude and MEMORY.md as Claude's</text>
+<text x="52" y="650" font-size="10" fill="#334466" font-style="italic">memory scratchpad it updates."</text>
+<line x1="46" y1="660" x2="368" y2="660" stroke="#c8d4ee" stroke-width="0.8"/>
+<text x="52" y="678" font-size="9.5" fill="#6677aa">— Thariq Shihipar，Claude Code 早期用户</text>
+
+<!-- Toggle tip -->
+<rect x="30" y="706" width="346" height="90" rx="10" fill="#f5f5f5" stroke="#d8d8d8" stroke-width="1" filter="url(#sh-sm)"/>
+<text x="52" y="726" font-size="11" font-weight="bold" fill="#444">⚙️  开关控制（默认开启）</text>
+<line x1="46" y1="734" x2="368" y2="734" stroke="#e0e0e0" stroke-width="0.8"/>
+<text x="52" y="752" font-size="10" font-family="'Courier New',monospace" fill="#555">/memory</text>
+<text x="120" y="752" font-size="10" fill="#888">会话内切换</text>
+<text x="52" y="768" font-size="10" font-family="'Courier New',monospace" fill="#555">"autoMemoryEnabled": false</text>
+<text x="52" y="784" font-size="10" font-family="'Courier New',monospace" fill="#555">CLAUDE_CODE_DISABLE_AUTO_MEMORY=1</text>
+
+<!-- ===== CENTER: 六层图形化层级 ===== -->
+<rect x="404" y="76" width="420" height="732" rx="12" fill="#f5f8ff" stroke="#b8ccf0" stroke-width="2" filter="url(#sh-md)"/>
+<text x="614" y="100" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a2a4a">六层 Memory 层级</text>
+<text x="614" y="116" text-anchor="middle" font-size="11" fill="#9aabcc">越往下越具体，优先级越高</text>
+<line x1="424" y1="124" x2="804" y2="124" stroke="#c8d8f0" stroke-width="1"/>
+
+<!-- Funnel / pyramid visual: 6 trapezoid layers stacked -->
+<!-- Layer 1: Managed Policy — widest, top -->
+<path d="M 454,136 L 774,136 L 754,188 L 474,188 Z" fill="#fce8f4" stroke="#d080b8" stroke-width="1.5" filter="url(#sh-sm)"/>
+<text x="614" y="158" text-anchor="middle" font-size="11" font-weight="bold" fill="#8a2060">① Managed Policy</text>
+<text x="614" y="176" text-anchor="middle" font-size="10" fill="#aa4080">组织级 · 公司 IT 下发 · 系统路径</text>
+
+<!-- Layer 2: Project Memory -->
+<path d="M 474,194 L 754,194 L 734,246 L 494,246 Z" fill="#fff4e0" stroke="#e8a830" stroke-width="1.5" filter="url(#sh-sm)"/>
+<text x="614" y="216" text-anchor="middle" font-size="11" font-weight="bold" fill="#aa6600">② Project Memory</text>
+<text x="614" y="234" text-anchor="middle" font-size="10" fill="#886600">./CLAUDE.md · 进 git · 团队共享</text>
+
+<!-- Layer 3: Project Rules -->
+<path d="M 494,252 L 734,252 L 714,304 L 514,304 Z" fill="#eef3ff" stroke="#8899dd" stroke-width="1.5" filter="url(#sh-sm)"/>
+<text x="614" y="274" text-anchor="middle" font-size="11" font-weight="bold" fill="#3355aa">③ Project Rules</text>
+<text x="614" y="292" text-anchor="middle" font-size="10" fill="#5566aa">.claude/rules/*.md · 模块化</text>
+
+<!-- Layer 4: User Memory -->
+<path d="M 514,310 L 714,310 L 694,362 L 534,362 Z" fill="#edfaf2" stroke="#60c080" stroke-width="1.5" filter="url(#sh-sm)"/>
+<text x="614" y="332" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a6a3a">④ User Memory</text>
+<text x="614" y="350" text-anchor="middle" font-size="10" fill="#2a7a4a">~/.claude/CLAUDE.md · 个人全局</text>
+
+<!-- Layer 5: Project Memory Local -->
+<path d="M 534,368 L 694,368 L 674,420 L 554,420 Z" fill="#f5eeff" stroke="#a070d8" stroke-width="1.5" filter="url(#sh-sm)"/>
+<text x="614" y="390" text-anchor="middle" font-size="11" font-weight="bold" fill="#6622aa">⑤ Project Local</text>
+<text x="614" y="408" text-anchor="middle" font-size="10" fill="#7733bb">CLAUDE.local.md · gitignore</text>
+
+<!-- Layer 6: Auto Memory — narrowest, bottom, highlighted -->
+<path d="M 554,426 L 674,426 L 654,490 L 574,490 Z" fill="#d8f5e8" stroke="#28b870" stroke-width="2.5" filter="url(#sh-sm)"/>
+<text x="614" y="450" text-anchor="middle" font-size="11" font-weight="bold" fill="#0a6a40">⑥ Auto Memory</text>
+<text x="614" y="468" text-anchor="middle" font-size="10" fill="#1a8a50">~/.claude/projects/.../memory/</text>
+<text x="614" y="484" text-anchor="middle" font-size="9.5" fill="#2a9a60">✨ Claude 自动写入</text>
+
+<!-- Priority label -->
+<text x="440" y="320" text-anchor="middle" font-size="9" fill="#b0bcd0" transform="rotate(-90,440,320)">优先级递增 ↓</text>
+<line x1="448" y1="136" x2="448" y2="490" stroke="#d8e4f0" stroke-width="1" stroke-dasharray="3,3"/>
+<polygon points="444,492 452,492 448,502" fill="#d8e4f0"/>
+
+<!-- Auto memory detail box -->
+<rect x="424" y="512" width="376" height="130" rx="10" fill="#1e1e2e" filter="url(#sh-sm)"/>
+<text x="440" y="532" font-size="10" font-family="'Courier New',monospace">
+  <tspan fill="#89b4fa">~/.claude/projects/&lt;project&gt;/memory/</tspan>
+</text>
+<text x="440" y="550" font-size="10" font-family="'Courier New',monospace">
+  <tspan fill="#cdd6f4">├── </tspan><tspan fill="#a6e3a1">MEMORY.md</tspan><tspan fill="#6c7086">         # 索引，前200行常驻</tspan>
+</text>
+<text x="440" y="568" font-size="10" font-family="'Courier New',monospace">
+  <tspan fill="#cdd6f4">├── </tspan><tspan fill="#89b4fa">hardware-insights.md</tspan><tspan fill="#6c7086">   # 按需读取</tspan>
+</text>
+<text x="440" y="586" font-size="10" font-family="'Courier New',monospace">
+  <tspan fill="#cdd6f4">├── </tspan><tspan fill="#89b4fa">debugging-cases.md</tspan><tspan fill="#6c7086">     # 按需读取</tspan>
+</text>
+<text x="440" y="604" font-size="10" font-family="'Courier New',monospace">
+  <tspan fill="#cdd6f4">└── </tspan><tspan fill="#89b4fa">sync-patterns.md</tspan><tspan fill="#6c7086">       # 按需读取</tspan>
+</text>
+<line x1="440" y1="614" x2="788" y2="614" stroke="#6c7086" stroke-width="0.5" stroke-dasharray="4,3"/>
+<text x="440" y="630" font-size="9.5" font-family="'Courier New',monospace" fill="#6c7086"># &lt;project&gt; 由 git 根目录路径派生，worktree 各自独立</text>
+
+<!-- What to save / not save -->
+<rect x="424" y="654" width="180" height="142" rx="10" fill="#edfaf2" stroke="#80d098" stroke-width="1.5" filter="url(#sh-sm)"/>
+<text x="514" y="674" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a6a3a">✅ 值得写入</text>
+<line x1="440" y1="682" x2="596" y2="682" stroke="#a0d8b0" stroke-width="0.8"/>
+<text x="440" y="700" font-size="10" fill="#1a4a2a">• 解决过的 bug 根因</text>
+<text x="440" y="718" font-size="10" fill="#1a4a2a">• 硬件坑点和约束</text>
+<text x="440" y="736" font-size="10" fill="#1a4a2a">• 跨会话稳定的模式</text>
+<text x="440" y="754" font-size="10" fill="#1a4a2a">• 用户偏好和风格</text>
+<text x="440" y="778" font-size="9.5" fill="#2a8a4a" font-style="italic">→ 验证标准：bit-wise 对齐</text>
+
+<rect x="620" y="654" width="180" height="142" rx="10" fill="#fff2f2" stroke="#f0a0a0" stroke-width="1.5" filter="url(#sh-sm)"/>
+<text x="710" y="674" text-anchor="middle" font-size="11" font-weight="bold" fill="#aa3333">❌ 不该写入</text>
+<line x1="636" y1="682" x2="792" y2="682" stroke="#f0c0c0" stroke-width="0.8"/>
+<text x="636" y="700" font-size="10" fill="#883333">• 当前任务临时状态</text>
+<text x="636" y="718" font-size="10" fill="#883333">• 未验证的猜测</text>
+<text x="636" y="736" font-size="10" fill="#883333">• 与 CLAUDE.md 重复</text>
+<text x="636" y="754" font-size="10" fill="#883333">• 会话级中间结果</text>
+<text x="636" y="778" font-size="9.5" fill="#cc4444" font-style="italic">→ 错误记忆比没有更糟</text>
+
+<!-- ===== RIGHT: 知识飞轮 ===== -->
+<rect x="840" y="76" width="342" height="732" rx="12" fill="#f8faff" stroke="#d0daf0" stroke-width="1.5" filter="url(#sh-sm)"/>
+<text x="1011" y="100" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a2a4a">知识飞轮</text>
+<text x="1011" y="116" text-anchor="middle" font-size="11" fill="#9aabcc">Memory 让 Claude 越用越聪明</text>
+<line x1="860" y1="124" x2="1164" y2="124" stroke="#d0daf0" stroke-width="1"/>
+
+<!-- Flywheel circle diagram -->
+<!-- Center circle -->
+<circle cx="1011" cy="330" r="52" fill="#1a2a4a" filter="url(#sh)"/>
+<text x="1011" y="324" text-anchor="middle" font-size="11" font-weight="bold" fill="#ffffff">Auto</text>
+<text x="1011" y="340" text-anchor="middle" font-size="11" font-weight="bold" fill="#a6e3a1">Memory</text>
+
+<!-- 4 orbit nodes -->
+<!-- Top: 遇到问题 -->
+<circle cx="1011" cy="178" r="38" fill="#fff8ee" stroke="#f0a030" stroke-width="2" filter="url(#sh-sm)"/>
+<text x="1011" y="173" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#aa6600">遇到问题</text>
+<text x="1011" y="189" text-anchor="middle" font-size="9.5" fill="#886600">调试 · 排查</text>
+
+<!-- Right: 解决沉淀 -->
+<circle cx="1140" cy="330" r="38" fill="#edfaf2" stroke="#2a9a5a" stroke-width="2" filter="url(#sh-sm)"/>
+<text x="1140" y="325" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#1a6a3a">解决沉淀</text>
+<text x="1140" y="341" text-anchor="middle" font-size="9.5" fill="#2a7a4a">写入 Memory</text>
+
+<!-- Bottom: 下次复用 -->
+<circle cx="1011" cy="482" r="38" fill="#eef3ff" stroke="#3366cc" stroke-width="2" filter="url(#sh-sm)"/>
+<text x="1011" y="477" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#3355aa">下次复用</text>
+<text x="1011" y="493" text-anchor="middle" font-size="9.5" fill="#5566aa">跨会话持久</text>
+
+<!-- Left: 自动加载 -->
+<circle cx="882" cy="330" r="38" fill="#f5eeff" stroke="#8844cc" stroke-width="2" filter="url(#sh-sm)"/>
+<text x="882" y="325" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#6622aa">自动加载</text>
+<text x="882" y="341" text-anchor="middle" font-size="9.5" fill="#7733bb">新会话读取</text>
+
+<!-- Arrows between nodes (curved arcs) -->
+<!-- Top → Right -->
+<path d="M 1044,196 Q 1110,220 1122,294" fill="none" stroke="#f0a030" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arr-orange)"/>
+<!-- Right → Bottom -->
+<path d="M 1130,366 Q 1120,430 1044,464" fill="none" stroke="#2a9a5a" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arr-green)"/>
+<!-- Bottom → Left -->
+<path d="M 978,464 Q 900,440 900,366" fill="none" stroke="#3366cc" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arr-blue)"/>
+<!-- Left → Top -->
+<path d="M 900,294 Q 920,220 978,196" fill="none" stroke="#8844cc" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arr-purple)"/>
+
+<defs>
+  <marker id="arr-orange" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+    <path d="M0,0 L6,3 L0,6" fill="none" stroke="#f0a030" stroke-width="1.5"/>
+  </marker>
+  <marker id="arr-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+    <path d="M0,0 L6,3 L0,6" fill="none" stroke="#2a9a5a" stroke-width="1.5"/>
+  </marker>
+  <marker id="arr-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+    <path d="M0,0 L6,3 L0,6" fill="none" stroke="#3366cc" stroke-width="1.5"/>
+  </marker>
+  <marker id="arr-purple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+    <path d="M0,0 L6,3 L0,6" fill="none" stroke="#8844cc" stroke-width="1.5"/>
+  </marker>
+</defs>
+
+<!-- M100 example -->
+<rect x="856" y="536" width="326" height="110" rx="10" fill="#f0f4ff" stroke="#b0c4ee" stroke-width="1.5" filter="url(#sh-sm)"/>
+<rect x="856" y="536" width="5" height="110" rx="2" fill="#3366cc"/>
+<text x="876" y="558" font-size="11" font-weight="bold" fill="#3355aa">M100 实际案例</text>
+<line x1="872" y1="566" x2="1174" y2="566" stroke="#c8d4ee" stroke-width="0.8"/>
+<text x="872" y="584" font-size="10.5" fill="#334477">遇到 barrier 死锁 → 排查根因</text>
+<text x="872" y="602" font-size="10.5" fill="#334477">→ 沉淀到 barrier-removal.md</text>
+<text x="872" y="620" font-size="10.5" fill="#334477">→ 下次会话直接复用，不重复排查</text>
+<text x="872" y="636" font-size="10" fill="#6677aa" font-style="italic">验证标准始终是：bit-wise 对齐</text>
+
+<!-- How to trigger memory -->
+<rect x="856" y="658" width="326" height="138" rx="10" fill="#f2fbf5" stroke="#80d098" stroke-width="1.5" filter="url(#sh-sm)"/>
+<text x="876" y="678" font-size="11" font-weight="bold" fill="#1a6a3a">💬 如何触发记忆</text>
+<line x1="872" y1="686" x2="1174" y2="686" stroke="#a0d8b0" stroke-width="0.8"/>
+<rect x="872" y="694" width="298" height="18" rx="4" fill="#e8f8ee"/>
+<text x="880" y="707" font-size="10" font-family="'Courier New',monospace" fill="#1a4a2a">"记住我们用 pnpm，不用 npm"</text>
+<rect x="872" y="716" width="298" height="18" rx="4" fill="#e8f8ee"/>
+<text x="880" y="729" font-size="10" font-family="'Courier New',monospace" fill="#1a4a2a">"保存到 memory：API 测试需要 Redis"</text>
+<text x="872" y="754" font-size="10" fill="#2a6a3a">也可用 /memory 直接编辑 memory 文件</text>
+<text x="872" y="772" font-size="10" fill="#2a6a3a">Claude 解决问题后也会自动沉淀</text>
+<text x="872" y="788" font-size="9.5" fill="#1a8a4a">→ 无需手动维护，越用越聪明</text>
+</svg>

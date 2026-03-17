@@ -1,0 +1,26 @@
+<svg width="1400" height="900" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+<rect width="1400" height="900" fill="white"/>
+<defs>
+  <filter id="sh-md"><feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="#00000028"/></filter>
+  <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M 30 0 L 0 0 0 30" fill="none" stroke="#f0f2f8" stroke-width="0.5"/></pattern>
+  <linearGradient id="header-grad"><stop offset="0%" style="stop-color:#ff8c42"/><stop offset="100%" style="stop-color:#ffaa66"/></linearGradient>
+</defs>
+<rect width="1400" height="900" fill="url(#grid)"/>
+<text x="700" y="50" font-size="32" font-weight="700" fill="#2c3e50" text-anchor="middle">Self-Consistency：提示词 + temperature=1 + 多次运行</text>
+<text x="700" y="85" font-size="16" fill="#7788aa" text-anchor="middle">同一提示词运行5次，投票选最可靠答案</text>
+
+<g id="left"><rect x="100" y="130" width="600" height="700" rx="12" fill="white" filter="url(#sh-md)"/><rect x="100" y="130" width="600" height="50" rx="12" fill="#e74c3c"/><rect x="100" y="168" width="600" height="12" fill="#e74c3c"/><text x="400" y="162" font-size="22" font-weight="700" fill="white" text-anchor="middle">❌ 单次运行</text>
+<rect x="130" y="210" width="540" height="100" rx="8" fill="#fff5f5" stroke="#e74c3c" stroke-width="2"/><text x="150" y="235" font-size="14" font-weight="700" fill="#e74c3c">Prompt + temperature=0:</text><text x="150" y="260" font-size="12" fill="#5a6c7d">"Henry 骑行60英里，第一次停在20英里，</text><text x="150" y="280" font-size="12" fill="#5a6c7d">第二次停在终点前15英里，两次间骑多少？"</text>
+<path d="M 400 330 L 400 360" stroke="#e74c3c" stroke-width="3" fill="none"/><path d="M 395 360 L 400 370 L 405 360 Z" fill="#e74c3c"/>
+<rect x="130" y="390" width="540" height="80" rx="8" fill="#fff5f5" stroke="#e74c3c" stroke-width="2"/><text x="150" y="420" font-size="14" font-weight="700" fill="#e74c3c">输出：</text><text x="150" y="450" font-size="15" fill="#2c3e50">Answer: 35 ✗ 错误</text>
+<rect x="130" y="490" width="540" height="310" rx="8" fill="#fff5f5" stroke="#e74c3c" stroke-width="2"/><text x="150" y="520" font-size="15" font-weight="700" fill="#e74c3c">问题：</text><text x="170" y="555" font-size="13" fill="#2c3e50">• temperature=0 输出确定，但可能错</text><text x="170" y="585" font-size="13" fill="#2c3e50">• 单次运行，无法验证答案可靠性</text><text x="170" y="615" font-size="13" fill="#2c3e50">• 模型可能理解错题意</text><text x="170" y="645" font-size="13" fill="#2c3e50">• 没有"自我纠错"机制</text><text x="150" y="690" font-size="13" fill="#7788aa" font-style="italic">准确率：约 40%</text><rect x="150" y="715" width="500" height="70" rx="6" fill="#ffe5e5"/><text x="400" y="755" font-size="13" font-weight="600" fill="#e74c3c" text-anchor="middle">提示词没有利用"多样性"和"投票"机制</text></g>
+
+<g id="right"><rect x="750" y="130" width="600" height="700" rx="12" fill="white" filter="url(#sh-md)"/><rect x="750" y="130" width="600" height="50" rx="12" fill="#9b59b6"/><rect x="750" y="168" width="600" height="12" fill="#9b59b6"/><text x="1050" y="162" font-size="22" font-weight="700" fill="white" text-anchor="middle">✅ Self-Consistency</text>
+<rect x="780" y="210" width="540" height="120" rx="8" fill="#f3e5f5" stroke="#9b59b6" stroke-width="2"/><text x="800" y="235" font-size="14" font-weight="700" fill="#9b59b6">Prompt + temperature=1 + 运行5次:</text><text x="800" y="260" font-size="12" fill="#5a6c7d">"Think step by step. Henry骑行60英里...</text><text x="800" y="285" font-size="12" fill="#27ae60" font-style="italic">关键：temperature=1 增加多样性</text><text x="800" y="310" font-size="12" fill="#27ae60" font-style="italic">关键：运行5次，每次独立推理</text>
+<path d="M 1050 350 L 1050 380" stroke="#9b59b6" stroke-width="3" fill="none"/><path d="M 1045 380 L 1050 390 L 1055 380 Z" fill="#9b59b6"/>
+<rect x="780" y="410" width="540" height="180" rx="8" fill="#f3e5f5" stroke="#9b59b6" stroke-width="2"/><text x="800" y="440" font-size="14" font-weight="700" fill="#9b59b6">5次输出：</text><text x="820" y="470" font-size="12" fill="#5a6c7d">Run 1: Answer: 25 ✓ (60-20-15)</text><text x="820" y="495" font-size="12" fill="#5a6c7d">Run 2: Answer: 25 ✓ (45-20)</text><text x="820" y="520" font-size="12" fill="#5a6c7d">Run 3: Answer: 25 ✓ (剩40-15)</text><text x="820" y="545" font-size="12" fill="#e74c3c">Run 4: Answer: 35 ✗ (理解错)</text><text x="820" y="570" font-size="12" fill="#5a6c7d">Run 5: Answer: 25 ✓ (间距=45-20)</text>
+<rect x="780" y="610" width="540" height="70" rx="8" fill="#e3f2fd" stroke="#3498db" stroke-width="2"/><text x="1050" y="640" font-size="14" font-weight="700" fill="#3498db" text-anchor="middle">投票：25得4票，35得1票</text><text x="1050" y="665" font-size="13" fill="#27ae60" text-anchor="middle">多数答案：25 ✅</text>
+<rect x="780" y="700" width="540" height="100" rx="8" fill="#e8f5e9" stroke="#27ae60" stroke-width="2"/><text x="800" y="730" font-size="14" font-weight="700" fill="#27ae60">准确率：70-85%</text><text x="800" y="755" font-size="12" fill="#5a6c7d">多样性推理 + 投票机制过滤错误</text><text x="800" y="780" font-size="12" fill="#5a6c7d">即使有1次错误，多数投票仍能得到正确答案</text></g>
+
+<rect x="200" y="850" width="1000" height="30" rx="6" fill="#fff8f0" stroke="#ff8c42" stroke-width="1"/><text x="700" y="872" font-size="14" font-weight="600" fill="#2c3e50" text-anchor="middle">💡 提示词配置：temperature=1（增加多样性）+ NUM_RUNS=5 + 投票选多数 → 复杂推理任务必备</text>
+</svg>

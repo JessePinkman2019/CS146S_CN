@@ -1,0 +1,269 @@
+<svg width="1400" height="900" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+<rect width="1400" height="900" fill="white"/>
+<defs>
+  <!-- Filters -->
+  <filter id="sh-sm" x="-8%" y="-8%" width="116%" height="124%">
+    <feDropShadow dx="0" dy="1" stdDeviation="4" flood-color="#00000018"/>
+  </filter>
+  <filter id="sh-md" x="-12%" y="-12%" width="124%" height="136%">
+    <feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="#00000028"/>
+  </filter>
+  <filter id="glow-blue" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#3366cc" flood-opacity="0.35"/>
+  </filter>
+  <filter id="glow-orange" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#ff8c42" flood-opacity="0.35"/>
+  </filter>
+
+  <!-- Grid pattern -->
+  <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+    <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#f0f2f8" stroke-width="0.5"/>
+  </pattern>
+
+  <!-- Arrow markers -->
+  <marker id="arr-big" markerWidth="16" markerHeight="12" refX="14" refY="6" orient="auto">
+    <path d="M0,1 L14,6 L0,11 Z" fill="#ff8c42"/>
+  </marker>
+  <marker id="arr-sm" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <path d="M0,0.5 L7,3 L0,5.5 Z" fill="#7788aa"/>
+  </marker>
+
+  <!-- Gradients -->
+  <linearGradient id="arrow-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" style="stop-color:#7788aa;stop-opacity:0.4"/>
+    <stop offset="100%" style="stop-color:#ff8c42;stop-opacity:1"/>
+  </linearGradient>
+
+  <linearGradient id="left-header" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" style="stop-color:#3366cc"/>
+    <stop offset="100%" style="stop-color:#4477dd"/>
+  </linearGradient>
+
+  <linearGradient id="right-header" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" style="stop-color:#ff8c42"/>
+    <stop offset="100%" style="stop-color:#ffaa66"/>
+  </linearGradient>
+</defs>
+
+<!-- Background -->
+<rect width="1400" height="900" fill="url(#grid)"/>
+
+<!-- Main Title -->
+<text x="700" y="50" font-size="32" font-weight="700" fill="#2c3e50" text-anchor="middle">
+  从使用到原理：Claude Code 的底层技术
+</text>
+<text x="700" y="85" font-size="16" fill="#7788aa" text-anchor="middle">
+  前面讲的是"怎么用"，现在讲"为什么这样用"
+</text>
+
+<!-- ========== LEFT PANEL: Claude Code 使用层 ========== -->
+<g id="left-panel">
+  <!-- Panel background -->
+  <rect x="50" y="130" width="520" height="700" rx="12" fill="white" filter="url(#sh-md)"/>
+
+  <!-- Header -->
+  <rect x="50" y="130" width="520" height="60" rx="12" fill="url(#left-header)"/>
+  <rect x="50" y="178" width="520" height="12" fill="url(#left-header)"/>
+
+  <text x="310" y="168" font-size="24" font-weight="700" fill="white" text-anchor="middle">
+    Claude Code 使用层
+  </text>
+  <text x="310" y="220" font-size="14" fill="#7788aa" text-anchor="middle">
+    你已经掌握的工具和方法
+  </text>
+
+  <!-- Section 1: 知识体系 -->
+  <g id="knowledge-section">
+    <rect x="80" y="250" width="460" height="140" rx="8" fill="#f8f9fa" stroke="#e1e4e8" stroke-width="2"/>
+
+    <text x="100" y="275" font-size="16" font-weight="700" fill="#3366cc">
+      📚 知识体系
+    </text>
+
+    <text x="120" y="305" font-size="14" fill="#2c3e50">
+      • CLAUDE.md - 项目宪法，每次加载
+    </text>
+    <text x="120" y="330" font-size="14" fill="#2c3e50">
+      • Skills - 按需加载的专项知识
+    </text>
+    <text x="120" y="355" font-size="14" fill="#2c3e50">
+      • Memory - 跨会话经验沉淀
+    </text>
+    <text x="120" y="380" font-size="13" fill="#7788aa" font-style="italic">
+      → 知识飞轮：越用越强
+    </text>
+  </g>
+
+  <!-- Section 2: 工作模式 -->
+  <g id="workflow-section">
+    <rect x="80" y="410" width="460" height="140" rx="8" fill="#f8f9fa" stroke="#e1e4e8" stroke-width="2"/>
+
+    <text x="100" y="435" font-size="16" font-weight="700" fill="#3366cc">
+      ⚙️ 工作模式
+    </text>
+
+    <text x="120" y="465" font-size="14" fill="#2c3e50">
+      • Plan Mode - 先规划再执行
+    </text>
+    <text x="120" y="490" font-size="14" fill="#2c3e50">
+      • Subagents - 隔离高消耗操作
+    </text>
+    <text x="120" y="515" font-size="14" fill="#2c3e50">
+      • Agent Loop - 循环推理执行
+    </text>
+    <text x="120" y="540" font-size="13" fill="#7788aa" font-style="italic">
+      → 结构化工作流
+    </text>
+  </g>
+
+  <!-- Section 3: 对话管理 -->
+  <g id="session-section">
+    <rect x="80" y="570" width="460" height="140" rx="8" fill="#f8f9fa" stroke="#e1e4e8" stroke-width="2"/>
+
+    <text x="100" y="595" font-size="16" font-weight="700" fill="#3366cc">
+      💬 对话管理
+    </text>
+
+    <text x="120" y="625" font-size="14" fill="#2c3e50">
+      • Context 管理 - 200k token 有限资源
+    </text>
+    <text x="120" y="650" font-size="14" fill="#2c3e50">
+      • 有效沟通 - 直接提问、尽早纠偏
+    </text>
+    <text x="120" y="675" font-size="14" fill="#2c3e50">
+      • 会话恢复 - 像管理分支一样管理会话
+    </text>
+    <text x="120" y="700" font-size="13" fill="#7788aa" font-style="italic">
+      → 精准上下文
+    </text>
+  </g>
+</g>
+
+<!-- ========== CENTER: Transition Arrow ========== -->
+<g id="transition-arrow">
+  <!-- Big arrow shaft -->
+  <path d="M 600 450 L 770 450" stroke="url(#arrow-grad)" stroke-width="8" fill="none" marker-end="url(#arr-big)"/>
+
+  <!-- Key insight below arrow -->
+  <text x="685" y="510" font-size="12" fill="#7788aa" text-anchor="middle" font-style="italic">
+    理解原理 → 写出更好的 CLAUDE.md 和 Skills
+  </text>
+</g>
+
+<!-- ========== RIGHT PANEL: 提示词工程层 ========== -->
+<g id="right-panel">
+  <!-- Panel background -->
+  <rect x="830" y="130" width="520" height="700" rx="12" fill="white" filter="url(#sh-md)"/>
+
+  <!-- Header -->
+  <rect x="830" y="130" width="520" height="60" rx="12" fill="url(#right-header)"/>
+  <rect x="830" y="178" width="520" height="12" fill="url(#right-header)"/>
+
+  <text x="1090" y="168" font-size="24" font-weight="700" fill="white" text-anchor="middle">
+    提示词工程基础
+  </text>
+  <text x="1090" y="220" font-size="14" fill="#7788aa" text-anchor="middle">
+    接下来要学习的底层技术
+  </text>
+
+  <!-- Technique 1: K-shot -->
+  <g id="tech-kshot">
+    <rect x="860" y="250" width="460" height="90" rx="8" fill="#fff8f0" stroke="#ff8c42" stroke-width="2"/>
+
+    <circle cx="890" cy="285" r="18" fill="#ff8c42" filter="url(#glow-orange)"/>
+    <text x="890" y="292" font-size="16" font-weight="700" fill="white" text-anchor="middle">1</text>
+
+    <text x="920" y="275" font-size="15" font-weight="700" fill="#2c3e50">
+      K-shot 提示 - 通过示例学习
+    </text>
+    <text x="920" y="295" font-size="13" fill="#5a6c7d">
+      给几个示例，模型就能学会模式
+    </text>
+    <text x="920" y="315" font-size="12" fill="#ff8c42" font-weight="600">
+      → Skills 的 description 里带具体例子
+    </text>
+  </g>
+
+  <!-- Technique 2: CoT -->
+  <g id="tech-cot">
+    <rect x="860" y="355" width="460" height="90" rx="8" fill="#fff8f0" stroke="#ff8c42" stroke-width="2"/>
+
+    <circle cx="890" cy="390" r="18" fill="#ff8c42" filter="url(#glow-orange)"/>
+    <text x="890" y="397" font-size="16" font-weight="700" fill="white" text-anchor="middle">2</text>
+
+    <text x="920" y="380" font-size="15" font-weight="700" fill="#2c3e50">
+      CoT 思维链 - 逐步推理
+    </text>
+    <text x="920" y="400" font-size="13" fill="#5a6c7d">
+      让模型"先想再答"，展示推理过程
+    </text>
+    <text x="920" y="420" font-size="12" fill="#ff8c42" font-weight="600">
+      → Plan Mode 自动使用 CoT
+    </text>
+  </g>
+
+  <!-- Technique 3: Self-Consistency -->
+  <g id="tech-consistency">
+    <rect x="860" y="460" width="460" height="90" rx="8" fill="#fff8f0" stroke="#ff8c42" stroke-width="2"/>
+
+    <circle cx="890" cy="495" r="18" fill="#ff8c42" filter="url(#glow-orange)"/>
+    <text x="890" y="502" font-size="16" font-weight="700" fill="white" text-anchor="middle">3</text>
+
+    <text x="920" y="485" font-size="15" font-weight="700" fill="#2c3e50">
+      Self-Consistency - 多次投票
+    </text>
+    <text x="920" y="505" font-size="13" fill="#5a6c7d">
+      多次投票提升准确率
+    </text>
+    <text x="920" y="525" font-size="12" fill="#ff8c42" font-weight="600">
+      → 复杂推理的保障
+    </text>
+  </g>
+
+  <!-- Technique 4: RAG -->
+  <g id="tech-rag">
+    <rect x="860" y="565" width="460" height="90" rx="8" fill="#fff8f0" stroke="#ff8c42" stroke-width="2"/>
+
+    <circle cx="890" cy="600" r="18" fill="#ff8c42" filter="url(#glow-orange)"/>
+    <text x="890" y="607" font-size="16" font-weight="700" fill="white" text-anchor="middle">4</text>
+
+    <text x="920" y="590" font-size="15" font-weight="700" fill="#2c3e50">
+      RAG 检索增强 - 基于文档
+    </text>
+    <text x="920" y="610" font-size="13" fill="#5a6c7d">
+      基于文档回答问题
+    </text>
+    <text x="920" y="630" font-size="12" fill="#ff8c42" font-weight="600">
+      → Skills 的实现原理
+    </text>
+  </g>
+
+  <!-- Technique 5: Reflexion -->
+  <g id="tech-reflexion">
+    <rect x="860" y="670" width="460" height="90" rx="8" fill="#fff8f0" stroke="#ff8c42" stroke-width="2"/>
+
+    <circle cx="890" cy="705" r="18" fill="#ff8c42" filter="url(#glow-orange)"/>
+    <text x="890" y="712" font-size="16" font-weight="700" fill="white" text-anchor="middle">5</text>
+
+    <text x="920" y="695" font-size="15" font-weight="700" fill="#2c3e50">
+      Reflexion 反思 - 错误反馈
+    </text>
+    <text x="920" y="715" font-size="13" fill="#5a6c7d">
+      生成 → 测试 → 反馈 → 改进
+    </text>
+    <text x="920" y="735" font-size="12" fill="#ff8c42" font-weight="600">
+      → Claude 能自己改 bug 的原因
+    </text>
+  </g>
+</g>
+
+<!-- ========== BOTTOM: Key Insight ========== -->
+<g id="bottom-insight">
+  <rect x="200" y="850" width="1000" height="30" rx="6" fill="#fff8f0" stroke="#ff8c42" stroke-width="1"/>
+
+  <text x="700" y="872" font-size="14" font-weight="600" fill="#2c3e50" text-anchor="middle">
+    💡 核心洞察：理解这5个技术，你就能写出更精准的 CLAUDE.md、更高效的 Skills、更有效的提示词
+  </text>
+</g>
+
+</svg>

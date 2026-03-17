@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code 知识架构</title>
+<style>
+  body { margin: 0; background: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  svg { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+</style>
+</head>
+<body>
+<svg width="1200" height="660" viewBox="0 0 1200 660" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+    <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#00000018"/>
+  </filter>
+  <filter id="shadow-sm" x="-10%" y="-10%" width="120%" height="130%">
+    <feDropShadow dx="0" dy="1" stdDeviation="3" flood-color="#00000012"/>
+  </filter>
+  <symbol id="cloud" viewBox="0 0 110 65">
+    <path d="M 18,55 Q 5,55 5,43 Q 5,33 15,31 Q 13,14 28,12 Q 36,2 48,10 Q 55,3 65,10 Q 76,2 85,12 Q 100,13 100,30 Q 110,32 108,43 Q 107,55 94,55 Z"/>
+  </symbol>
+</defs>
+
+<!-- Title -->
+<text x="600" y="36" text-anchor="middle" font-size="22" font-weight="bold" fill="#1a2a4a">Claude Code 知识架构</text>
+<text x="600" y="58" text-anchor="middle" font-size="13" fill="#7788aa">三层知识体系如何构建最小上下文集合</text>
+
+<!-- Root node: Claude Code -->
+<rect x="510" y="74" width="180" height="52" rx="12" ry="12" fill="#1a2a4a" filter="url(#shadow)"/>
+<text x="600" y="97" text-anchor="middle" font-size="18" font-weight="bold" fill="#ffffff">Claude Code</text>
+<text x="600" y="115" text-anchor="middle" font-size="12" fill="#aabbdd">知识架构</text>
+
+<!-- Curved lines: root to branches -->
+<path d="M 560,126 C 560,155 200,155 200,177" stroke="#c0cce0" stroke-width="2" fill="none"/>
+<path d="M 600,126 C 600,155 600,155 600,177" stroke="#c0cce0" stroke-width="2" fill="none"/>
+<path d="M 640,126 C 640,155 1000,155 1000,177" stroke="#c0cce0" stroke-width="2" fill="none"/>
+
+<!-- BRANCH 1: CLAUDE.md -->
+<rect x="60" y="177" width="280" height="82" rx="10" ry="10" fill="#fff8ee" stroke="#f0c070" stroke-width="2" filter="url(#shadow)"/>
+<text x="200" y="202" text-anchor="middle" font-size="14" font-weight="bold" fill="#aa6600">CLAUDE.md</text>
+<text x="200" y="219" text-anchor="middle" font-size="11" fill="#cc8800">项目宪法</text>
+<rect x="140" y="228" width="120" height="20" rx="10" ry="10" fill="#fff0cc" stroke="#e8c060" stroke-width="1"/>
+<text x="200" y="242" text-anchor="middle" font-size="10" fill="#aa6600">始终在上下文</text>
+
+<!-- CLAUDE.md content card -->
+<rect x="60" y="270" width="280" height="110" rx="8" ry="8" fill="#fffbf0" stroke="#e8d090" stroke-width="1" filter="url(#shadow-sm)"/>
+<text x="200" y="292" text-anchor="middle" font-size="10.5" fill="#664400">你是 M100 自研芯片</text>
+<text x="200" y="310" text-anchor="middle" font-size="10.5" fill="#664400">LLM prefill 专家助手</text>
+<text x="200" y="328" text-anchor="middle" font-size="10.5" fill="#664400">C 扩展硬件描述语言</text>
+<text x="200" y="346" text-anchor="middle" font-size="10.5" fill="#664400">数据驱动架构</text>
+<text x="200" y="364" text-anchor="middle" font-size="10.5" fill="#664400">优先级：正确性 &gt; 性能 &gt; 简洁</text>
+
+<!-- BRANCH 2: MEMORY.md -->
+<rect x="430" y="177" width="340" height="82" rx="10" ry="10" fill="#eef8f0" stroke="#90d0a0" stroke-width="2" filter="url(#shadow)"/>
+<text x="600" y="202" text-anchor="middle" font-size="14" font-weight="bold" fill="#2a7a4a">MEMORY.md</text>
+<text x="600" y="219" text-anchor="middle" font-size="11" fill="#4a9a6a">跨会话记忆</text>
+<rect x="540" y="228" width="120" height="20" rx="10" ry="10" fill="#d4edda" stroke="#82c99a" stroke-width="1"/>
+<text x="600" y="242" text-anchor="middle" font-size="10" fill="#2a7a4a">每次自动加载</text>
+
+<!-- MEMORY.md content card -->
+<rect x="430" y="270" width="340" height="110" rx="8" ry="8" fill="#f0fff4" stroke="#b0ddc0" stroke-width="1" filter="url(#shadow-sm)"/>
+<text x="600" y="292" text-anchor="middle" font-size="10.5" fill="#2a5a3a">__tm__  sch_scope 是硬件扩展语义</text>
+<text x="600" y="310" text-anchor="middle" font-size="10.5" fill="#2a5a3a">代码顺序 ≠ 执行顺序</text>
+<text x="600" y="328" text-anchor="middle" font-size="10.5" fill="#2a5a3a">信号量 wait 次数必须 = notify 次数</text>
+<text x="600" y="346" text-anchor="middle" font-size="10.5" fill="#2a5a3a">stride = 逻辑有效宽度，非物理行宽</text>
+<text x="600" y="364" text-anchor="middle" font-size="10.5" fill="#2a5a3a">不确定时，先问再动手</text>
+
+<!-- BRANCH 3: Skills -->
+<rect x="860" y="177" width="280" height="82" rx="10" ry="10" fill="#f5f0ff" stroke="#c8b8f0" stroke-width="1.5" stroke-dasharray="6,3" filter="url(#shadow)"/>
+<text x="1000" y="202" text-anchor="middle" font-size="14" font-weight="bold" fill="#7744cc">Skills</text>
+<text x="1000" y="219" text-anchor="middle" font-size="11" fill="#9977cc">专项知识库</text>
+<rect x="940" y="228" width="120" height="20" rx="10" ry="10" fill="#ede8ff" stroke="#c8b8f0" stroke-width="1"/>
+<text x="1000" y="242" text-anchor="middle" font-size="10" fill="#7744cc">触发时加载</text>
+
+<!-- Skills cloud grid row 1 -->
+<use href="#cloud" x="862" y="270" width="88" height="52" fill="#ede8ff" stroke="#b8a0e8" stroke-width="1"/>
+<text x="906" y="302" text-anchor="middle" font-size="9.5" fill="#6633bb">/hardware</text>
+<use href="#cloud" x="952" y="270" width="88" height="52" fill="#ede8ff" stroke="#b8a0e8" stroke-width="1"/>
+<text x="996" y="302" text-anchor="middle" font-size="9.5" fill="#6633bb">/sync</text>
+
+<!-- Skills cloud grid row 2 -->
+<use href="#cloud" x="862" y="330" width="88" height="52" fill="#ede8ff" stroke="#b8a0e8" stroke-width="1"/>
+<text x="906" y="362" text-anchor="middle" font-size="9.5" fill="#6633bb">/debug</text>
+<use href="#cloud" x="952" y="330" width="88" height="52" fill="#ede8ff" stroke="#b8a0e8" stroke-width="1"/>
+<text x="996" y="362" text-anchor="middle" font-size="9.5" fill="#6633bb">/attention</text>
+
+<!-- Skills cloud grid row 3 -->
+<use href="#cloud" x="862" y="390" width="88" height="52" fill="#ede8ff" stroke="#b8a0e8" stroke-width="1"/>
+<text x="906" y="422" text-anchor="middle" font-size="9.5" fill="#6633bb">/moe</text>
+<use href="#cloud" x="952" y="390" width="88" height="52" fill="#ede8ff" stroke="#b8a0e8" stroke-width="1"/>
+<text x="996" y="422" text-anchor="middle" font-size="9.5" fill="#6633bb">/allocator</text>
+
+<!-- Skills cloud grid row 4 -->
+<use href="#cloud" x="862" y="450" width="88" height="52" fill="#ede8ff" stroke="#b8a0e8" stroke-width="1"/>
+<text x="906" y="482" text-anchor="middle" font-size="9.5" fill="#6633bb">/workflow</text>
+<use href="#cloud" x="952" y="450" width="88" height="52" fill="#ede8ff" stroke="#b8a0e8" stroke-width="1"/>
+<text x="996" y="482" text-anchor="middle" font-size="9.5" fill="#6633bb">/commit</text>
+
+<!-- Converging lines: branches to bottom box -->
+<path d="M 200,380 C 200,450 500,470 500,484" stroke="#c0cce0" stroke-width="2" fill="none"/>
+<path d="M 600,380 C 600,430 600,460 600,484" stroke="#c0cce0" stroke-width="2" fill="none"/>
+<path d="M 1000,510 C 1000,530 700,470 700,484" stroke="#c0cce0" stroke-width="2" fill="none"/>
+
+<!-- Bottom convergence box -->
+<rect x="340" y="484" width="520" height="66" rx="10" ry="10" fill="#eef3ff" stroke="#7aaae8" stroke-width="1.5" filter="url(#shadow)"/>
+<text x="600" y="508" text-anchor="middle" font-size="12" font-weight="bold" fill="#3366cc">最小上下文集合</text>
+<text x="600" y="527" text-anchor="middle" font-size="11" fill="#3366cc">CLAUDE.md（常驻）+ MEMORY.md（常驻）+ Skills（按需）</text>
+<text x="600" y="545" text-anchor="middle" font-size="11" fill="#5588dd">= 精准上下文，高效解决问题</text>
+
+</svg>
+</body>
+</html>

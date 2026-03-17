@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1600px; height: 920px;
+  background: #ffffff;
+  font-family: 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei', sans-serif;
+  overflow: hidden; padding: 24px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.header { text-align: center; margin-bottom: 18px; }
+.header h1 { font-size: 28px; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; letter-spacing: 0.5px; }
+.header p { font-size: 14px; color: #777; }
+.main-row { display: flex; gap: 18px; margin-bottom: 16px; height: 480px; }
+.panel {
+  border-radius: 14px; padding: 16px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+.panel-left { flex: 1; background: #fffbf0; border: 1px solid #f0dfa0; }
+.panel-right { flex: 1; background: #f0f7ff; border: 1px solid #b8d8f8; }
+.panel-title {
+  font-size: 15px; font-weight: 700; color: #1a1a2e;
+  margin-bottom: 12px; padding-bottom: 8px;
+  border-bottom: 2px solid rgba(0,0,0,0.07);
+  display: flex; align-items: center; gap: 8px;
+}
+.contrast-grid {
+  display: grid; grid-template-columns: 1fr 32px 1fr;
+  gap: 8px; margin-bottom: 14px;
+}
+.contrast-col {
+  background: white; border-radius: 10px; padding: 10px 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.contrast-col h3 { font-size: 12px; font-weight: 700; margin-bottom: 8px; text-align: center; }
+.contrast-col.old h3 { color: #c0392b; }
+.contrast-col.new h3 { color: #27ae60; }
+.contrast-arrow { display: flex; align-items: center; justify-content: center; font-size: 22px; color: #aaa; }
+.contrast-item {
+  font-size: 12px; color: #555; padding: 5px 0;
+  border-bottom: 1px solid #f5f5f5; display: flex; align-items: center; gap: 6px;
+  line-height: 1.6;
+}
+.contrast-item:last-child { border-bottom: none; }
+.dot-red { width: 6px; height: 6px; border-radius: 50%; background: #e74c3c; flex-shrink: 0; }
+.dot-green { width: 6px; height: 6px; border-radius: 50%; background: #27ae60; flex-shrink: 0; }
+.code-block {
+  background: #1e1e2e; border-radius: 8px; padding: 12px 14px;
+  font-family: 'Courier New', monospace; font-size: 11.5px;
+  color: #cdd6f4; line-height: 1.8; overflow-x: hidden;
+}
+.code-block .kw { color: #cba6f7; }
+.code-block .str { color: #a6e3a1; }
+.code-block .cm { color: #6c7086; }
+.code-block .dir { color: #89b4fa; }
+.flow-col { display: flex; flex-direction: column; gap: 0; align-items: center; }
+.flow-step {
+  background: white; border-radius: 8px; padding: 9px 16px;
+  font-size: 12.5px; color: #333; width: 320px; text-align: center;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.09); border-left: 3px solid #4a9eff;
+  line-height: 1.6; min-height: 36px; display: flex; align-items: center; justify-content: center;
+}
+.flow-step.hl { background: #e8f4fd; border-left-color: #1565c0; font-weight: 600; }
+.flow-step.user { border-left-color: #9c27b0; background: #f9f0ff; }
+.flow-step.llm { border-left-color: #ff6b35; background: #fff3ee; }
+.flow-arrow { font-size: 16px; color: #4a9eff; line-height: 1.4; }
+.layer-row {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 7px 10px; border-radius: 8px; margin-bottom: 6px;
+}
+.layer-1 { background: #fff8e1; }
+.layer-2 { background: #e8f5e9; }
+.layer-3 { background: #e3f2fd; }
+.layer-badge {
+  font-size: 10px; font-weight: 700; padding: 2px 7px;
+  border-radius: 4px; white-space: nowrap; margin-top: 1px;
+}
+.layer-1 .layer-badge { background: #f59e0b; color: white; }
+.layer-2 .layer-badge { background: #22c55e; color: white; }
+.layer-3 .layer-badge { background: #3b82f6; color: white; }
+.layer-text { font-size: 12px; color: #444; line-height: 1.7; }
+.layer-text strong { color: #222; }
+.bottom-row { display: flex; gap: 14px; height: 240px; }
+.card {
+  flex: 1; border-radius: 12px; padding: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.card-title {
+  font-size: 13px; font-weight: 700; margin-bottom: 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+.card-body { font-size: 12px; color: #555; line-height: 1.75; }
+.tag {
+  display: inline-block; background: rgba(0,0,0,0.08);
+  border-radius: 4px; padding: 1px 6px; font-size: 10.5px;
+  font-family: monospace; color: #333;
+}
+.example-box {
+  background: rgba(255,255,255,0.6); border-radius: 6px;
+  padding: 6px 10px; margin-top: 6px; font-size: 11.5px;
+  color: #666; border-left: 2px solid rgba(0,0,0,0.15);
+  line-height: 1.7; overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Skills：按需加载的知识模块</h1>
+  <p>CLAUDE.md 全量加载 → Skills 渐进式披露，让 Claude Code 更聪明地使用上下文</p>
+</div>
+
+<div class="main-row">
+
+  <!-- Left Panel -->
+  <div class="panel panel-left">
+    <div class="panel-title">📦 为什么需要 Skills？</div>
+    <div class="contrast-grid">
+      <div class="contrast-col old">
+        <h3>❌ CLAUDE.md 的局限</h3>
+        <div class="contrast-item"><span class="dot-red"></span>始终全量加载到上下文</div>
+        <div class="contrast-item"><span class="dot-red"></span>越写越臃肿，Token 浪费</div>
+        <div class="contrast-item"><span class="dot-red"></span>知识混杂，难以维护</div>
+        <div class="contrast-item"><span class="dot-red"></span>无关内容干扰推理</div>
+      </div>
+      <div class="contrast-arrow">→</div>
+      <div class="contrast-col new">
+        <h3>✅ Skills 的解决方案</h3>
+        <div class="contrast-item"><span class="dot-green"></span>按需加载，用时才读</div>
+        <div class="contrast-item"><span class="dot-green"></span>模块化，职责清晰</div>
+        <div class="contrast-item"><span class="dot-green"></span>LLM 推理自动激活</div>
+        <div class="contrast-item"><span class="dot-green"></span>可组合、可版本控制</div>
+      </div>
+    </div>
+    <div class="panel-title" style="font-size:13px; margin-bottom:8px;">📁 文件结构（M100 项目示例）</div>
+    <div class="code-block">
+<span class="dir">.claude/skills/</span>
+├── <span class="dir">hardware/</span>
+│   └── <span class="str">SKILL.md</span>      <span class="cm"># M100 架构、tile/memory/event</span>
+├── <span class="dir">debug/</span>
+│   ├── <span class="str">SKILL.md</span>      <span class="cm"># 调试技巧</span>
+│   └── <span class="str">cases.md</span>      <span class="cm"># Reference 引用（按需读取）</span>
+└── <span class="dir">allocator/</span>
+    ├── <span class="str">SKILL.md</span>      <span class="cm"># 地址分配算法</span>
+    └── <span class="str">check.py</span>      <span class="cm"># Script 执行（按需运行）</span>
+
+<span class="cm">--- SKILL.md 元数据 ---</span>
+<span class="kw">---</span>
+<span class="kw">name:</span> <span class="str">hardware</span>
+<span class="kw">description:</span> <span class="str">M100 硬件架构、tile/memory/event 机制</span>
+<span class="kw">---</span>
+<span class="cm"># 正文内容（按需加载，不占常驻上下文）</span></div>
+  </div>
+
+  <!-- Right Panel: Flow + Progressive Disclosure -->
+  <div class="panel panel-right">
+    <div style="display:flex; gap:16px; height:100%;">
+
+      <!-- Flow -->
+      <div style="flex:1;">
+        <div class="panel-title">⚡ Skills 激活流程</div>
+        <div class="flow-col">
+          <div class="flow-step user">👤 用户提问</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">CC 发送：请求 + <strong>Skill 列表（仅 metadata）</strong></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step hl">🧠 LLM 推理：选择相关 Skill<br><span style="font-size:10.5px;color:#666;">description 是触发关键，非关键词匹配</span></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">CC 发送：请求 + <strong>完整 SKILL.md</strong></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step llm">🤖 LLM 响应（带完整知识）</div>
+        </div>
+        <div style="margin-top:10px; background:rgba(255,255,255,0.7); border-radius:8px; padding:8px 10px; font-size:11px; color:#555; border-left:3px solid #f59e0b;">
+          💡 <strong>写好 description 比写好内容更重要</strong><br>
+          例：<span style="font-family:monospace; color:#1565c0;">description: M100 硬件架构、sch_scope 语义、tile/memory/event 机制</span>
+        </div>
+      </div>
+
+      <!-- Progressive Disclosure -->
+      <div style="flex:1;">
+        <div class="panel-title">🔍 渐进式披露（三层）</div>
+        <div class="layer-row layer-1">
+          <div class="layer-badge">始终加载</div>
+          <div class="layer-text">
+            <strong>元数据层</strong>：name + description<br>
+            所有 Skill 的 metadata 常驻上下文，供 LLM 选择
+          </div>
+        </div>
+        <div class="layer-row layer-2">
+          <div class="layer-badge">按需加载</div>
+          <div class="layer-text">
+            <strong>指令层</strong>：SKILL.md 正文内容<br>
+            被选中后才加载，包含详细知识和操作指南
+          </div>
+        </div>
+        <div class="layer-row layer-3">
+          <div class="layer-badge">按需中的按需</div>
+          <div class="layer-text">
+            <strong>资源层</strong>：Reference（读文件）+ Script（跑脚本）<br>
+            SKILL.md 内条件触发，最深层的知识
+          </div>
+        </div>
+        <div style="margin-top:10px; background:rgba(255,255,255,0.7); border-radius:8px; padding:8px 10px; font-size:11px; color:#555;">
+          <div style="font-weight:700; margin-bottom:5px; color:#333;">M100 示例：/debug Skill</div>
+          <div style="color:#666; line-height:1.6;">
+            📄 SKILL.md → 调试方法论（指令层）<br>
+            📎 Reference: cases.md → 历史案例（仅提到"案例"时读取）<br>
+            🔧 Script: check.py → 地址检查（仅提到"检查地址"时运行）
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- end main-row -->
+
+<!-- Bottom Row: 5 Feature Cards -->
+<div class="bottom-row">
+
+  <div class="card" style="background:#fff8e1; border:1px solid #f0d060;">
+    <div class="card-title" style="color:#b45309;">🎯 自动激活</div>
+    <div class="card-body">
+      <strong>description 是触发关键</strong>，Claude 用 LLM 推理决定是否激活，不是关键词匹配。<br><br>
+      <div class="example-box">
+        ❌ <span class="tag">description: 硬件</span><br>
+        ✅ <span class="tag">description: M100 硬件架构、sch_scope 语义、tile/memory/event 机制详解</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="background:#f0fdf4; border:1px solid #86efac;">
+    <div class="card-title" style="color:#166534;">🔗 Skills 组合</div>
+    <div class="card-body">
+      创建<strong>元 Skill</strong> 编排多个 Skills，Skills 之间可以互相引用。<br><br>
+      <div class="example-box">
+        <span class="tag">/test</span> = 编译 + 运行 + 校验<br>
+        内部引用 <span class="tag">/verify</span> <span class="tag">/debug</span> <span class="tag">/allocator</span><br>
+        不懂 sch_scope？看 <span class="tag">/hardware</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="background:#eff6ff; border:1px solid #93c5fd;">
+    <div class="card-title" style="color:#1d4ed8;">📎 Reference & Script</div>
+    <div class="card-body">
+      <strong>Reference</strong>：条件触发，读取文件增加到上下文（只读）<br>
+      <strong>Script</strong>：条件触发，直接执行脚本（只跑）<br><br>
+      <div class="example-box">
+        提到"历史案例" → 读取 <span class="tag">cases.md</span><br>
+        提到"检查地址" → 运行 <span class="tag">check.py</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="background:#fdf4ff; border:1px solid #d8b4fe;">
+    <div class="card-title" style="color:#7e22ce;">🧠 Memory 联动</div>
+    <div class="card-body">
+      Skills 可以引用 Memory，形成<strong>知识飞轮</strong>：<br>
+      解决问题 → 沉淀到 Memory → Skill 引用 → 下次更快<br><br>
+      <div class="example-box">
+        <span class="tag">/debug</span> SKILL.md 中：<br>
+        "查看 MEMORY.md 中的常见陷阱速查"
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="background:#fff1f2; border:1px solid #fca5a5;">
+    <div class="card-title" style="color:#991b1b;">📋 CLAUDE.md 索引</div>
+    <div class="card-body">
+      CLAUDE.md 保持<strong>精简</strong>，只放 Skills 索引，<br>
+      详细知识全部下沉到 Skills：<br><br>
+      <div class="example-box">
+        <span class="tag">/hardware</span> - 硬件架构<br>
+        <span class="tag">/attention</span> - Attention 流程<br>
+        <span class="tag">/debug</span> - 调试技巧
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

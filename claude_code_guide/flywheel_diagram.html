@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code 知识飞轮</title>
+<style>
+  body { margin: 0; padding: 20px; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+  svg { display: block; }
+</style>
+</head>
+<body>
+<svg width="1200" height="680" viewBox="0 0 1200 680" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#aabbdd"/>
+    </marker>
+    <marker id="arr-purple" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#c8b8f0"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#7aaae8"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#00000018"/>
+    </filter>
+    <filter id="shadow-sm" x="-8%" y="-8%" width="116%" height="124%">
+      <feDropShadow dx="0" dy="1" stdDeviation="3" flood-color="#00000012"/>
+    </filter>
+    <linearGradient id="speedGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#88cc99"/>
+      <stop offset="100%" stop-color="#aaccff"/>
+    </linearGradient>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6699cc"/>
+      <stop offset="100%" stop-color="#99bbee"/>
+    </linearGradient>
+    <symbol id="cloud" viewBox="0 0 110 65">
+      <path d="M 18,55 Q 5,55 5,43 Q 5,33 15,31 Q 13,14 28,12 Q 36,2 48,10 Q 55,3 65,10 Q 76,2 85,12 Q 100,13 100,30 Q 110,32 108,43 Q 107,55 94,55 Z"/>
+    </symbol>
+  </defs>
+
+  <!-- White background -->
+  <rect width="1200" height="680" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="600" y="38" text-anchor="middle" font-size="22" font-weight="bold" fill="#1a2a4a" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">Claude Code 知识飞轮</text>
+  <text x="600" y="60" text-anchor="middle" font-size="13" fill="#7788aa" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">每次解决问题，三层知识同步进化</text>
+
+  <!-- ===== CENTER FLYWHEEL ===== -->
+  <!-- Flywheel ring -->
+  <circle cx="580" cy="360" r="155" fill="none" stroke="url(#ringGrad)" stroke-width="3" opacity="0.7"/>
+  <!-- Inner decorative ring -->
+  <circle cx="580" cy="360" r="148" fill="none" stroke="#ddeeff" stroke-width="1" opacity="0.5"/>
+
+  <!-- Clockwise arc arrows on ring -->
+  <!-- Arc node1→node2 (top to right, clockwise) -->
+  <path d="M 617,210 A 155,155 0 0,1 735,397" fill="none" stroke="#aabbdd" stroke-width="2.5" marker-end="url(#arr)"/>
+  <!-- Arc node2→node3 (right to bottom, clockwise) -->
+  <path d="M 735,397 A 155,155 0 0,1 617,510" fill="none" stroke="#aabbdd" stroke-width="2.5" marker-end="url(#arr)"/>
+  <!-- Arc node3→node4 (bottom to left, clockwise) -->
+  <path d="M 543,510 A 155,155 0 0,1 425,397" fill="none" stroke="#aabbdd" stroke-width="2.5" marker-end="url(#arr)"/>
+  <!-- Arc node4→node1 (left to top, clockwise) -->
+  <path d="M 425,323 A 155,155 0 0,1 543,210" fill="none" stroke="#aabbdd" stroke-width="2.5" marker-end="url(#arr)"/>
+
+  <!-- Center circle -->
+  <circle cx="580" cy="360" r="52" fill="#f0f4ff" stroke="#b8ccf0" stroke-width="2" filter="url(#shadow-sm)"/>
+  <text x="580" y="353" text-anchor="middle" font-size="15" font-weight="bold" fill="#3366cc" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">越用</text>
+  <text x="580" y="373" text-anchor="middle" font-size="15" font-weight="bold" fill="#3366cc" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">越强</text>
+
+  <!-- Node 1: 遇到问题 (top, 12 o'clock) cx=580, cy=205 -->
+  <rect x="530" y="178" width="100" height="58" rx="10" ry="10" fill="#fff8ee" stroke="#f0a030" stroke-width="1.5" filter="url(#shadow-sm)"/>
+  <text x="580" y="198" text-anchor="middle" font-size="16">⚠</text>
+  <text x="580" y="213" text-anchor="middle" font-size="12" font-weight="bold" fill="#cc6600" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">遇到问题</text>
+  <text x="580" y="228" text-anchor="middle" font-size="10" fill="#888" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">M100精度对不齐</text>
+
+  <!-- Node 2: 召唤知识 (right, 3 o'clock) cx=735, cy=360 -->
+  <rect x="685" y="333" width="100" height="58" rx="10" ry="10" fill="#eef3ff" stroke="#7aaae8" stroke-width="1.5" filter="url(#shadow-sm)"/>
+  <text x="735" y="353" text-anchor="middle" font-size="16">📖</text>
+  <text x="735" y="368" text-anchor="middle" font-size="12" font-weight="bold" fill="#3355aa" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">召唤知识</text>
+  <text x="735" y="383" text-anchor="middle" font-size="10" fill="#5577bb" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">/debug /hardware</text>
+
+  <!-- Node 3: 解决问题 (bottom, 6 o'clock) cx=580, cy=515 -->
+  <rect x="530" y="488" width="100" height="58" rx="10" ry="10" fill="#eef8f0" stroke="#82c99a" stroke-width="1.5" filter="url(#shadow-sm)"/>
+  <text x="580" y="508" text-anchor="middle" font-size="16" fill="#2a7a4a">✓</text>
+  <text x="580" y="523" text-anchor="middle" font-size="12" font-weight="bold" fill="#2a7a4a" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">解决问题</text>
+  <text x="580" y="538" text-anchor="middle" font-size="10" fill="#2a7a4a" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">compare.py 对齐</text>
+
+  <!-- Node 4: 沉淀知识 (left, 9 o'clock) cx=425, cy=360 -->
+  <rect x="375" y="333" width="100" height="58" rx="10" ry="10" fill="#f5f0ff" stroke="#c8b8f0" stroke-width="1.5" filter="url(#shadow-sm)"/>
+  <text x="425" y="353" text-anchor="middle" font-size="16">💾</text>
+  <text x="425" y="368" text-anchor="middle" font-size="12" font-weight="bold" fill="#7744cc" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">沉淀知识</text>
+  <text x="425" y="383" text-anchor="middle" font-size="10" fill="#7744cc" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">更新三层架构</text>
+
+  <!-- ===== LEFT SIDE: Three knowledge layer cards ===== -->
+
+  <!-- Dashed arrows from node4 (left side ~x=375) to each card -->
+  <!-- To CLAUDE.md card (top) -->
+  <path d="M 375,352 C 330,340 290,270 260,240" fill="none" stroke="#c8b8f0" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-purple)"/>
+  <!-- To MEMORY.md card (middle) -->
+  <path d="M 375,362 L 262,362" fill="none" stroke="#c8b8f0" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-purple)"/>
+  <!-- To Skills card (bottom) -->
+  <path d="M 375,372 C 330,385 290,450 260,478" fill="none" stroke="#c8b8f0" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-purple)"/>
+
+  <!-- Card 1: CLAUDE.md (top-left) -->
+  <rect x="30" y="195" width="228" height="110" rx="10" ry="10" fill="#fff8ee" stroke="#f0c070" stroke-width="1.5" filter="url(#shadow-sm)"/>
+  <text x="46" y="217" font-size="13" font-weight="bold" fill="#aa6600" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">CLAUDE.md</text>
+  <text x="46" y="232" font-size="10" fill="#cc8800" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">项目宪法 · 始终在上下文</text>
+  <line x1="30" y1="240" x2="258" y2="240" stroke="#f0d090" stroke-width="0.8"/>
+  <text x="46" y="256" font-size="10" fill="#664400" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">❌ 不能用编译/运行 log 的</text>
+  <text x="46" y="270" font-size="10" fill="#664400" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">PASSED/FAILED 判断成功</text>
+  <!-- Badge -->
+  <rect x="148" y="283" width="96" height="18" rx="9" ry="9" fill="#fff0cc" stroke="#e8c060" stroke-width="1"/>
+  <text x="196" y="295" text-anchor="middle" font-size="10" fill="#aa6600" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">新规则沉淀</text>
+
+  <!-- Card 2: MEMORY.md (middle-left) -->
+  <rect x="30" y="325" width="228" height="110" rx="10" ry="10" fill="#eef8f0" stroke="#90d0a0" stroke-width="1.5" filter="url(#shadow-sm)"/>
+  <text x="46" y="347" font-size="13" font-weight="bold" fill="#2a7a4a" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">MEMORY.md</text>
+  <text x="46" y="362" font-size="10" fill="#4a9a6a" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">跨会话记忆 · 每次自动加载</text>
+  <line x1="30" y1="370" x2="258" y2="370" stroke="#a0d8b0" stroke-width="0.8"/>
+  <text x="46" y="386" font-size="10" fill="#2a5a3a" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">stride = 逻辑有效宽度</text>
+  <text x="46" y="400" font-size="10" fill="#2a5a3a" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">不是物理行宽 → 跨行读取根因</text>
+  <!-- Badge -->
+  <rect x="148" y="413" width="96" height="18" rx="9" ry="9" fill="#d4edda" stroke="#82c99a" stroke-width="1"/>
+  <text x="196" y="425" text-anchor="middle" font-size="10" fill="#2a7a4a" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">新经验沉淀</text>
+
+  <!-- Card 3: Skills (bottom-left) -->
+  <rect x="30" y="455" width="228" height="110" rx="10" ry="10" fill="#f5f0ff" stroke="#c8b8f0" stroke-width="1.5" stroke-dasharray="6,3" filter="url(#shadow-sm)"/>
+  <text x="46" y="477" font-size="13" font-weight="bold" fill="#7744cc" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">Skills</text>
+  <text x="46" y="492" font-size="10" fill="#9977cc" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">专项知识库 · 触发时加载</text>
+  <line x1="30" y1="500" x2="258" y2="500" stroke="#d0c0f0" stroke-width="0.8"/>
+  <text x="46" y="516" font-size="10" fill="#553399" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">新增 /barrier-removal skill</text>
+  <text x="46" y="530" font-size="10" fill="#553399" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">记录去 barrier 完整方法论</text>
+  <!-- Badge -->
+  <rect x="148" y="543" width="96" height="18" rx="9" ry="9" fill="#ede8ff" stroke="#c8b8f0" stroke-width="1"/>
+  <text x="196" y="555" text-anchor="middle" font-size="10" fill="#7744cc" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">新知识沉淀</text>
+
+  <!-- ===== RIGHT SIDE: 加速效果 panel ===== -->
+  <rect x="860" y="190" width="310" height="370" rx="14" ry="14" fill="#f8faff" stroke="#d0daf0" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="1015" y="218" text-anchor="middle" font-size="13" font-weight="bold" fill="#334466" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">飞轮加速效果</text>
+  <line x1="875" y1="228" x2="1155" y2="228" stroke="#d8e4f4" stroke-width="1"/>
+
+  <!-- Bar 1: 第1次 -->
+  <text x="880" y="258" font-size="11" fill="#888" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">第 1 次</text>
+  <rect x="940" y="244" width="60" height="22" rx="4" ry="4" fill="#ffddaa"/>
+  <text x="1010" y="259" font-size="10" fill="#cc8800" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">从零摸索</text>
+
+  <!-- Bar 2: 第2次 -->
+  <text x="880" y="295" font-size="11" fill="#666" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">第 2 次</text>
+  <rect x="940" y="281" width="110" height="22" rx="4" ry="4" fill="#aaccff"/>
+  <text x="1060" y="296" font-size="10" fill="#3366cc" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">有迹可循</text>
+
+  <!-- Bar 3: 第3次 -->
+  <text x="880" y="332" font-size="11" fill="#334" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">第 3 次</text>
+  <rect x="940" y="318" width="160" height="22" rx="4" ry="4" fill="#88cc99"/>
+  <text x="1110" y="333" font-size="10" fill="#2a7a4a" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">直达答案 ✓</text>
+
+  <!-- Note below bars -->
+  <text x="1015" y="362" text-anchor="middle" font-size="11" fill="#8899bb" font-style="italic" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">每次解决问题都在给知识库充电</text>
+
+  <!-- Divider -->
+  <line x1="875" y1="375" x2="1155" y2="375" stroke="#d8e4f4" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- M100 example box -->
+  <rect x="875" y="385" width="280" height="90" rx="8" ry="8" fill="#f0f4ff" stroke="#c0ccee" stroke-width="1"/>
+  <text x="1015" y="405" text-anchor="middle" font-size="11" font-weight="bold" fill="#334466" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">M100 实例：HDMA 越界</text>
+  <line x1="875" y1="412" x2="1155" y2="412" stroke="#d0daf0" stroke-width="0.8"/>
+  <text x="891" y="430" font-size="10" fill="#cc6644" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">第1次：排查3小时</text>
+  <text x="891" y="448" font-size="10" fill="#2a7a4a" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">第2次：/debug skill 10分钟定位</text>
+  <!-- Speed indicator -->
+  <rect x="875" y="460" width="280" height="10" rx="5" ry="5" fill="#e8eef8"/>
+  <rect x="875" y="460" width="200" height="10" rx="5" ry="5" fill="url(#speedGrad)"/>
+
+  <!-- Arrow from flywheel node2 area to right panel -->
+  <path d="M 786,362 C 820,362 840,362 858,362" fill="none" stroke="#aabbdd" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr)"/>
+
+  <!-- Bottom tagline -->
+  <text x="600" y="650" text-anchor="middle" font-size="12" fill="#aabbcc" font-family="-apple-system, PingFang SC, Microsoft YaHei, sans-serif">知识沉淀 → 召唤更快 → 解决更准 → 沉淀更多 → 飞轮加速</text>
+
+</svg>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Loop - 智能体循环</title>
+<style>
+  body { margin: 0; padding: 20px; background: #f5f7fa; font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+  .container { display: flex; justify-content: center; }
+</style>
+</head>
+<body>
+<div class="container">
+<svg width="1100" height="800" viewBox="0 0 1100 800" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#5566aa"/>
+  </marker>
+  <marker id="arr-green" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#3a9a50"/>
+  </marker>
+  <marker id="arr-purple" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#7a3aee"/>
+  </marker>
+  <filter id="sh">
+    <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#00000018"/>
+  </filter>
+</defs>
+
+<!-- 白底 -->
+<rect width="1100" height="800" fill="#fff" rx="14"/>
+
+<!-- 标题 -->
+<text x="550" y="36" text-anchor="middle" font-size="21" font-weight="bold" fill="#1a2a4a">Agent Loop — 智能体执行循环</text>
+<text x="550" y="56" text-anchor="middle" font-size="12" fill="#8899bb">Workflow 第4步「执行」的内部放大视图</text>
+<rect x="18" y="14" width="148" height="24" rx="5" fill="#f0ecff" stroke="#c0aaf0" stroke-width="1.2"/>
+<text x="92" y="30" text-anchor="middle" font-size="10" fill="#5a2a9a">📍 Workflow 第4步</text>
+
+<!-- ══ 泳道背景 ══
+     用户(20-159) | Agent核心(160-539) | 本地工具(540-809) | MCP(810-1079)  -->
+<rect x="20"  y="68" width="140" height="650" fill="#fffdf5" stroke="#e8d8a0" stroke-width="1"/>
+<rect x="160" y="68" width="380" height="650" fill="#f4f6ff" stroke="#c8d0f0" stroke-width="1"/>
+<rect x="540" y="68" width="270" height="650" fill="#f2fff5" stroke="#a8d8b0" stroke-width="1"/>
+<rect x="810" y="68" width="270" height="650" fill="#f8f0ff" stroke="#c8a8f0" stroke-width="1"/>
+
+<!-- 列标题 -->
+<rect x="20"  y="68" width="140" height="34" fill="#e8b820"/>
+<text x="90"  y="91" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">👤 用户</text>
+<rect x="160" y="68" width="380" height="34" fill="#5060d8"/>
+<text x="350" y="91" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">🧠 Agent 核心（LLM + 循环控制）</text>
+<rect x="540" y="68" width="270" height="34" fill="#2a9a48"/>
+<text x="675" y="91" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">🛠 本地工具执行</text>
+<rect x="810" y="68" width="270" height="34" fill="#8030d0"/>
+<text x="945" y="91" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">🔌 MCP 服务</text>
+
+<!-- ══ STEP 1: 用户输入 + 构建conversation  y≈120 ══ -->
+<rect x="28" y="118" width="124" height="52" rx="7" fill="#fff8e0" stroke="#d8a820" stroke-width="1.8" filter="url(#sh)"/>
+<text x="90" y="140" text-anchor="middle" font-size="11" font-weight="bold" fill="#7a4a00">用户输入</text>
+<text x="90" y="158" text-anchor="middle" font-size="9" fill="#9a6010" font-family="monospace">user_message</text>
+
+<!-- 箭头 用户→Agent -->
+<line x1="152" y1="144" x2="168" y2="144" stroke="#5566aa" stroke-width="2" marker-end="url(#arr)"/>
+
+<!-- Agent: 构建conversation -->
+<rect x="170" y="108" width="360" height="76" rx="7" fill="#e8ecff" stroke="#7080d8" stroke-width="1.8" filter="url(#sh)"/>
+<text x="350" y="130" text-anchor="middle" font-size="12" font-weight="bold" fill="#2a3a9a">① 构建 conversation</text>
+<rect x="182" y="138" width="158" height="36" rx="5" fill="#fff" stroke="#a0b0f0" stroke-width="1.2"/>
+<text x="261" y="153" text-anchor="middle" font-size="10" font-weight="bold" fill="#3a4aaa">system_prompt 拼接</text>
+<text x="261" y="167" text-anchor="middle" font-size="9" fill="#5566aa" font-family="monospace">tools_desc + instructions</text>
+<rect x="352" y="138" width="166" height="36" rx="5" fill="#fff" stroke="#a0b0f0" stroke-width="1.2"/>
+<text x="435" y="153" text-anchor="middle" font-size="10" font-weight="bold" fill="#3a4aaa">conversation 历史</text>
+<text x="435" y="167" text-anchor="middle" font-size="9" fill="#5566aa" font-family="monospace">[sys, user, asst, ...]</text>
+
+<!-- 箭头下 -->
+<line x1="350" y1="186" x2="350" y2="206" stroke="#5566aa" stroke-width="2" marker-end="url(#arr)"/>
+
+<!-- ══ STEP 2: LLM推理  y≈210 ══ -->
+<rect x="170" y="208" width="360" height="76" rx="7" fill="#d0daff" stroke="#5060d8" stroke-width="2" filter="url(#sh)"/>
+<text x="350" y="232" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a2a9a">② LLM 推理</text>
+<text x="350" y="252" text-anchor="middle" font-size="10" fill="#3a4aaa" font-family="monospace">response = llm.generate(conversation)</text>
+<text x="350" y="270" text-anchor="middle" font-size="9" fill="#5060cc">输出：纯文本  或  tool_call 指令</text>
+
+<!-- 箭头下 -->
+<line x1="350" y1="286" x2="350" y2="306" stroke="#5566aa" stroke-width="2" marker-end="url(#arr)"/>
+
+<!-- ══ STEP 3: 解析响应  y≈308 ══ -->
+<rect x="170" y="308" width="360" height="66" rx="7" fill="#ece6ff" stroke="#8070d8" stroke-width="1.8" filter="url(#sh)"/>
+<text x="350" y="330" text-anchor="middle" font-size="12" font-weight="bold" fill="#4a2a9a">③ 解析响应</text>
+<text x="350" y="350" text-anchor="middle" font-size="10" fill="#6a4aaa" font-family="monospace">tool_calls = parse(response)</text>
+<text x="350" y="366" text-anchor="middle" font-size="9" fill="#7a5aaa">识别 tool_name + args</text>
+
+<!-- 箭头下 -->
+<line x1="350" y1="376" x2="350" y2="396" stroke="#5566aa" stroke-width="2" marker-end="url(#arr)"/>
+
+<!-- ══ STEP 4: 判断菱形  y≈400 ══ -->
+<path d="M350,398 L412,432 L350,466 L288,432 Z" fill="#fffbe6" stroke="#c89818" stroke-width="2" filter="url(#sh)"/>
+<text x="350" y="428" text-anchor="middle" font-size="10" font-weight="bold" fill="#7a5000">有</text>
+<text x="350" y="442" text-anchor="middle" font-size="10" font-weight="bold" fill="#7a5000">tool_call?</text>
+
+<!-- 否 → 左 -->
+<line x1="288" y1="432" x2="154" y2="432" stroke="#5566aa" stroke-width="2" marker-end="url(#arr)"/>
+<text x="220" y="424" text-anchor="middle" font-size="9" fill="#5566aa">否</text>
+
+<!-- 是 → 右 -->
+<line x1="414" y1="432" x2="548" y2="432" stroke="#2a9a48" stroke-width="2" marker-end="url(#arr-green)"/>
+<text x="480" y="424" text-anchor="middle" font-size="9" fill="#2a8a40">是</text>
+
+<!-- ══ 用户列：输出答案  y≈410 ══ -->
+<rect x="28" y="408" width="124" height="50" rx="7" fill="#d4edda" stroke="#50a860" stroke-width="1.8" filter="url(#sh)"/>
+<text x="90" y="430" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a6a30">✓ 输出答案</text>
+<text x="90" y="448" text-anchor="middle" font-size="9" fill="#2a8a40">返回最终响应</text>
+
+<!-- ══ STEP 5: 本地工具执行  y≈390 ══ -->
+<rect x="548" y="388" width="254" height="128" rx="7" fill="#e4fced" stroke="#40a858" stroke-width="1.8" filter="url(#sh)"/>
+<text x="675" y="412" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a6a30">④ 本地工具执行</text>
+<text x="675" y="430" text-anchor="middle" font-size="9" fill="#2a8a40" font-family="monospace">result = TOOL_REGISTRY[name](**args)</text>
+<rect x="556" y="438" width="72" height="24" rx="5" fill="#b8f0cc" stroke="#50a858" stroke-width="1"/>
+<text x="592" y="454" text-anchor="middle" font-size="9" fill="#1a5a28">📄 read_file</text>
+<rect x="636" y="438" width="72" height="24" rx="5" fill="#b8f0cc" stroke="#50a858" stroke-width="1"/>
+<text x="672" y="454" text-anchor="middle" font-size="9" fill="#1a5a28">📁 list_files</text>
+<rect x="716" y="438" width="72" height="24" rx="5" fill="#b8f0cc" stroke="#50a858" stroke-width="1"/>
+<text x="752" y="454" text-anchor="middle" font-size="9" fill="#1a5a28">✏️ edit_file</text>
+<text x="675" y="482" text-anchor="middle" font-size="9" fill="#3a8a50" font-family="monospace">for name, args in tool_calls:</text>
+<text x="675" y="498" text-anchor="middle" font-size="9" fill="#3a8a50" font-family="monospace">  result = execute(name, args)</text>
+
+<!-- 本地工具 → MCP（虚线可选） -->
+<line x1="802" y1="432" x2="818" y2="432" stroke="#8030d0" stroke-width="1.8" stroke-dasharray="4,3" marker-end="url(#arr-purple)"/>
+<text x="810" y="422" text-anchor="middle" font-size="8" fill="#7030c0">可选</text>
+
+<!-- ══ STEP 5b: MCP服务  y≈360 ══ -->
+<rect x="820" y="360" width="252" height="210" rx="7" fill="#f2e8ff" stroke="#a870e0" stroke-width="1.8" filter="url(#sh)"/>
+<text x="946" y="384" text-anchor="middle" font-size="12" font-weight="bold" fill="#5a1a9a">⑤ MCP 服务</text>
+<text x="946" y="402" text-anchor="middle" font-size="9" fill="#7a3aaa" font-family="monospace">FastMCP / stdio / SSE</text>
+<rect x="830" y="410" width="232" height="22" rx="5" fill="#e0d0ff" stroke="#a070d8" stroke-width="1"/>
+<text x="946" y="425" text-anchor="middle" font-size="9" fill="#5a1a9a">@mcp.tool → 自动注册为工具</text>
+<rect x="830" y="440" width="104" height="24" rx="5" fill="#d8c8ff" stroke="#9060c8" stroke-width="1"/>
+<text x="882" y="456" text-anchor="middle" font-size="9" fill="#4a1a8a">📄 read_file</text>
+<rect x="942" y="440" width="104" height="24" rx="5" fill="#d8c8ff" stroke="#9060c8" stroke-width="1"/>
+<text x="994" y="456" text-anchor="middle" font-size="9" fill="#4a1a8a">✏️ edit_file</text>
+<rect x="830" y="472" width="104" height="24" rx="5" fill="#d8c8ff" stroke="#9060c8" stroke-width="1"/>
+<text x="882" y="488" text-anchor="middle" font-size="9" fill="#4a1a8a">📁 list_files</text>
+<text x="946" y="520" text-anchor="middle" font-size="9" fill="#7a3aaa">工具描述自动注入 system_prompt</text>
+<text x="946" y="536" text-anchor="middle" font-size="9" fill="#9a5acc" font-family="monospace">tool_list_repr → llm context</text>
+<text x="946" y="556" text-anchor="middle" font-size="9" fill="#7a3aaa">结果以 tool_result 格式返回</text>
+
+<!-- MCP结果回传 -->
+<line x1="820" y1="432" x2="804" y2="432" stroke="#8030d0" stroke-width="1.8" stroke-dasharray="4,3" marker-end="url(#arr-purple)"/>
+
+<!-- ══ STEP 6: 结果追加  y≈530 ══ -->
+<line x1="675" y1="518" x2="675" y2="538" stroke="#2a9a48" stroke-width="2" marker-end="url(#arr-green)"/>
+<rect x="548" y="540" width="254" height="62" rx="7" fill="#c8f0d8" stroke="#40a858" stroke-width="1.8" filter="url(#sh)"/>
+<text x="675" y="562" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a6a30">⑥ 结果追加对话</text>
+<text x="675" y="580" text-anchor="middle" font-size="9" fill="#2a8a40" font-family="monospace">conversation.append(tool_result(...))</text>
+
+<!-- ══ 循环回路：结果 → LLM推理（沿底部+左侧绕回，不穿过任何框）══ -->
+<path d="M675,604 L675,636 L140,636 L140,246 L168,246"
+      fill="none" stroke="#7a3aee" stroke-width="2.5" stroke-dasharray="7,4"
+      marker-end="url(#arr-purple)"/>
+<text x="136" y="440" text-anchor="middle" font-size="10" font-weight="bold" fill="#7a3aee" transform="rotate(-90,136,440)">↻ 继续循环</text>
+
+<!-- ══ 图例  y≈650 ══ -->
+<line x1="20" y1="648" x2="1080" y2="648" stroke="#d0d8e8" stroke-width="1"/>
+<text x="36" y="668" font-size="10" font-weight="bold" fill="#4a5a8a">图例：</text>
+<rect x="86" y="657" width="11" height="11" rx="2" fill="#a0b0f0"/>
+<text x="103" y="668" font-size="9" fill="#3a4aaa">system_prompt = tools描述 + 指令，每次调用LLM前拼接</text>
+<rect x="86" y="675" width="11" height="11" rx="2" fill="#b8f0cc"/>
+<text x="103" y="686" font-size="9" fill="#1a6a30">tool_call = LLM输出的结构化指令，parse() 提取 name + args</text>
+<rect x="86" y="693" width="11" height="11" rx="2" fill="#d8c8ff"/>
+<text x="103" y="704" font-size="9" fill="#5a1a9a">MCP = 工具以独立进程运行，@mcp.tool 自动将描述注入 system_prompt</text>
+<line x1="86" y1="716" x2="100" y2="716" stroke="#7a3aee" stroke-width="2.5" stroke-dasharray="5,3"/>
+<text x="106" y="720" font-size="9" fill="#7a3aee">紫色虚线 = 循环路径，工具结果追加后重新进入 LLM 推理</text>
+<text x="1078" y="788" text-anchor="end" font-size="9" fill="#aabbcc">Agent Loop · Workflow 第4步放大</text>
+
+</svg>
+</div>
+</body>
+</html>

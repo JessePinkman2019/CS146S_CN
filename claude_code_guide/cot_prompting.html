@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>CoT 思维链 - 逐步推理</title>
+<style>
+  body {
+    margin: 0;
+    padding: 20px;
+    background: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+</style>
+</head>
+<body>
+<svg width="1400" height="900" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="sh-md" x="-12%" y="-12%" width="124%" height="136%">
+    <feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="#00000028"/>
+  </filter>
+
+  <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+    <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#f0f2f8" stroke-width="0.5"/>
+  </pattern>
+
+  <linearGradient id="header-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" style="stop-color:#ff8c42"/>
+    <stop offset="100%" style="stop-color:#ffaa66"/>
+  </linearGradient>
+</defs>
+
+<rect width="1400" height="900" fill="url(#grid)"/>
+
+<!-- Title -->
+<text x="700" y="50" font-size="32" font-weight="700" fill="#2c3e50" text-anchor="middle">
+  CoT 思维链：提示词里加"先想再答"
+</text>
+<text x="700" y="85" font-size="16" fill="#7788aa" text-anchor="middle">
+  一句话触发推理过程，准确率从 1% 提升到 60%
+</text>
+
+<!-- ========== LEFT: Without CoT ========== -->
+<g id="without-cot">
+  <rect x="100" y="130" width="600" height="700" rx="12" fill="white" filter="url(#sh-md)"/>
+  <rect x="100" y="130" width="600" height="50" rx="12" fill="#e74c3c"/>
+  <rect x="100" y="168" width="600" height="12" fill="#e74c3c"/>
+
+  <text x="400" y="162" font-size="22" font-weight="700" fill="white" text-anchor="middle">
+    ❌ 无 CoT 提示词
+  </text>
+
+  <!-- Prompt -->
+  <rect x="130" y="210" width="540" height="100" rx="8" fill="#fff5f5" stroke="#e74c3c" stroke-width="2"/>
+  <text x="150" y="235" font-size="14" font-weight="700" fill="#e74c3c">
+    Prompt:
+  </text>
+  <text x="150" y="260" font-size="13" fill="#5a6c7d">
+    "Calculate: 3^12345 mod 100 = ?"
+  </text>
+  <text x="150" y="285" font-size="12" fill="#7788aa" font-style="italic">
+    （没有要求展示推理步骤）
+  </text>
+
+  <!-- Arrow -->
+  <path d="M 400 330 L 400 360" stroke="#e74c3c" stroke-width="3" fill="none"/>
+  <path d="M 395 360 L 400 370 L 405 360 Z" fill="#e74c3c"/>
+
+  <!-- Output -->
+  <rect x="130" y="390" width="540" height="100" rx="8" fill="#fff5f5" stroke="#e74c3c" stroke-width="2"/>
+  <text x="150" y="420" font-size="14" font-weight="700" fill="#e74c3c">
+    模型输出：
+  </text>
+  <text x="150" y="450" font-size="16" fill="#2c3e50">
+    Answer: 87
+  </text>
+  <text x="150" y="475" font-size="12" fill="#7788aa">
+    （直接猜测，大概率错误）
+  </text>
+
+  <!-- Problem -->
+  <rect x="130" y="510" width="540" height="290" rx="8" fill="#fff5f5" stroke="#e74c3c" stroke-width="2"/>
+  <text x="150" y="540" font-size="15" font-weight="700" fill="#e74c3c">
+    为什么失败？
+  </text>
+  <text x="170" y="575" font-size="13" fill="#2c3e50">
+    • 没有推理过程，直接"猜"答案
+  </text>
+  <text x="170" y="605" font-size="13" fill="#2c3e50">
+    • 无法找到周期规律（3^20 ≡ 1 mod 100）
+  </text>
+  <text x="170" y="635" font-size="13" fill="#2c3e50">
+    • 不会应用数学定理
+  </text>
+  <text x="170" y="665" font-size="13" fill="#2c3e50">
+    • 模型"跳步"，丢失中间逻辑
+  </text>
+  <text x="150" y="710" font-size="13" fill="#7788aa" font-style="italic">
+    类比：考试不写步骤，直接写答案
+  </text>
+  <rect x="150" y="735" width="500" height="50" rx="6" fill="#ffe5e5"/>
+  <text x="400" y="765" font-size="13" font-weight="600" fill="#e74c3c" text-anchor="middle">
+    准确率：约 1%（100个数字里随机猜）
+  </text>
+</g>
+
+<!-- ========== RIGHT: With CoT ========== -->
+<g id="with-cot">
+  <rect x="750" y="130" width="600" height="700" rx="12" fill="white" filter="url(#sh-md)"/>
+  <rect x="750" y="130" width="600" height="50" rx="12" fill="#3498db"/>
+  <rect x="750" y="168" width="600" height="12" fill="#3498db"/>
+
+  <text x="1050" y="162" font-size="22" font-weight="700" fill="white" text-anchor="middle">
+    ✅ CoT 提示词
+  </text>
+
+  <!-- Prompt with CoT trigger -->
+  <rect x="780" y="210" width="540" height="120" rx="8" fill="#f0f8ff" stroke="#3498db" stroke-width="2"/>
+  <text x="800" y="235" font-size="14" font-weight="700" fill="#3498db">
+    Prompt:
+  </text>
+  <text x="800" y="260" font-size="13" fill="#2c3e50" font-weight="600">
+    "Think step by step.
+  </text>
+  <text x="800" y="285" font-size="13" fill="#5a6c7d">
+    Calculate: 3^12345 mod 100 = ?"
+  </text>
+  <text x="800" y="310" font-size="12" fill="#27ae60" font-style="italic">
+    关键：加了"Think step by step"触发词
+  </text>
+
+  <!-- Arrow -->
+  <path d="M 1050 350 L 1050 380" stroke="#3498db" stroke-width="3" fill="none"/>
+  <path d="M 1045 380 L 1050 390 L 1055 380 Z" fill="#3498db"/>
+
+  <!-- Output with reasoning -->
+  <rect x="780" y="410" width="540" height="300" rx="8" fill="#f0f8ff" stroke="#3498db" stroke-width="2"/>
+  <text x="800" y="440" font-size="14" font-weight="700" fill="#3498db">
+    模型输出（推理过程）：
+  </text>
+  <text x="820" y="475" font-size="13" fill="#2c3e50" font-weight="600">
+    Step 1: 找周期
+  </text>
+  <text x="840" y="500" font-size="12" fill="#5a6c7d">
+    3^20 ≡ 1 (mod 100)
+  </text>
+  <text x="820" y="535" font-size="13" fill="#2c3e50" font-weight="600">
+    Step 2: 计算余数
+  </text>
+  <text x="840" y="560" font-size="12" fill="#5a6c7d">
+    12345 = 617 × 20 + 5
+  </text>
+  <text x="820" y="595" font-size="13" fill="#2c3e50" font-weight="600">
+    Step 3: 简化
+  </text>
+  <text x="840" y="620" font-size="12" fill="#5a6c7d">
+    3^12345 ≡ 3^5 (mod 100)
+  </text>
+  <text x="820" y="655" font-size="13" fill="#2c3e50" font-weight="600">
+    Step 4: 计算结果
+  </text>
+  <text x="840" y="680" font-size="12" fill="#5a6c7d">
+    3^5 = 243 mod 100 = 43
+  </text>
+
+  <!-- Final answer -->
+  <rect x="780" y="730" width="540" height="70" rx="8" fill="#e8f5e9" stroke="#27ae60" stroke-width="2"/>
+  <text x="1050" y="760" font-size="15" font-weight="700" fill="#27ae60" text-anchor="middle">
+    Answer: 43 ✅
+  </text>
+  <text x="1050" y="785" font-size="12" fill="#7788aa" text-anchor="middle">
+    准确率：60-80%（展示推理步骤）
+  </text>
+</g>
+
+<!-- ========== BOTTOM: Key Insight ========== -->
+<g id="bottom-insight">
+  <rect x="200" y="850" width="1000" height="30" rx="6" fill="#fff8f0" stroke="#ff8c42" stroke-width="1"/>
+
+  <text x="700" y="872" font-size="14" font-weight="600" fill="#2c3e50" text-anchor="middle">
+    💡 提示词模板："Think step by step" / "Let's work this out" → CLAUDE.md 里写"复杂问题先列步骤"
+  </text>
+</g>
+
+</svg>
+</body>
+</html>

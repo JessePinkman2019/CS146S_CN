@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>Reflexion 反思</title>
+<style>body{margin:0;padding:20px;background:#f0f2f5;display:flex;justify-content:center;font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;}</style>
+</head>
+<body>
+<svg width="1400" height="900" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+<defs><filter id="sh-md"><feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="#00000028"/></filter><pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M 30 0 L 0 0 0 30" fill="none" stroke="#f0f2f8" stroke-width="0.5"/></pattern><linearGradient id="header-grad"><stop offset="0%" style="stop-color:#ff8c42"/><stop offset="100%" style="stop-color:#ffaa66"/></linearGradient></defs>
+<rect width="1400" height="900" fill="url(#grid)"/>
+<text x="700" y="50" font-size="32" font-weight="700" fill="#2c3e50" text-anchor="middle">Reflexion：提示词里加"自我批判"指令</text>
+<text x="700" y="85" font-size="16" fill="#7788aa" text-anchor="middle">生成 → 测试反馈 → 反思提示词（分析错误+改进）→ 重新生成</text>
+
+<g id="left"><rect x="100" y="130" width="600" height="700" rx="12" fill="white" filter="url(#sh-md)"/><rect x="100" y="130" width="600" height="50" rx="12" fill="#e74c3c"/><rect x="100" y="168" width="600" height="12" fill="#e74c3c"/><text x="400" y="162" font-size="22" font-weight="700" fill="white" text-anchor="middle">❌ 简单重试提示词</text>
+<rect x="130" y="210" width="540" height="100" rx="8" fill="#fff5f5" stroke="#e74c3c" stroke-width="2"/><text x="150" y="235" font-size="14" font-weight="700" fill="#e74c3c">初始Prompt:</text><text x="150" y="260" font-size="12" fill="#5a6c7d">"写函数 is_valid_password(pw)</text><text x="150" y="280" font-size="12" fill="#5a6c7d">检查密码强度"</text>
+<path d="M 400 330 L 400 360" stroke="#e74c3c" stroke-width="3" fill="none"/><path d="M 395 360 L 400 370 L 405 360 Z" fill="#e74c3c"/>
+<rect x="130" y="390" width="540" height="100" rx="8" fill="#fff5f5" stroke="#e74c3c" stroke-width="2"/><text x="150" y="420" font-size="14" font-weight="700" fill="#e74c3c">输出 → 测试失败</text><text x="150" y="450" font-size="12" fill="#5a6c7d">def is_valid_password(pw):</text><text x="170" y="470" font-size="12" fill="#5a6c7d">return len(pw) >= 8</text>
+<path d="M 400 510 L 400 540" stroke="#e74c3c" stroke-width="3" fill="none"/><path d="M 395 540 L 400 550 L 405 540 Z" fill="#e74c3c"/>
+<rect x="130" y="570" width="540" height="80" rx="8" fill="#fff5f5" stroke="#e74c3c" stroke-width="2"/><text x="150" y="600" font-size="14" font-weight="700" fill="#e74c3c">重试Prompt（无反思）:</text><text x="150" y="625" font-size="12" fill="#5a6c7d">"再试一次，写 is_valid_password"</text>
+<rect x="130" y="670" width="540" height="130" rx="8" fill="#fff5f5" stroke="#e74c3c" stroke-width="2"/><text x="150" y="700" font-size="15" font-weight="700" fill="#e74c3c">问题：</text><text x="170" y="735" font-size="13" fill="#2c3e50">• 没有分析为什么失败</text><text x="170" y="765" font-size="13" fill="#2c3e50">• 盲目重试，可能重复错误</text><text x="150" y="790" font-size="13" fill="#7788aa" font-style="italic">提示词缺少"反思"机制</text></g>
+
+<g id="right"><rect x="750" y="130" width="600" height="700" rx="12" fill="white" filter="url(#sh-md)"/><rect x="750" y="130" width="600" height="50" rx="12" fill="#16a085"/><rect x="750" y="168" width="600" height="12" fill="#16a085"/><text x="1050" y="162" font-size="22" font-weight="700" fill="white" text-anchor="middle">✅ Reflexion 提示词</text>
+<rect x="780" y="210" width="540" height="100" rx="8" fill="#e8f5e9" stroke="#16a085" stroke-width="2"/><text x="800" y="235" font-size="14" font-weight="700" fill="#16a085">初始Prompt（同左）:</text><text x="800" y="260" font-size="12" fill="#5a6c7d">"写函数 is_valid_password(pw)</text><text x="800" y="280" font-size="12" fill="#5a6c7d">检查密码强度"</text>
+<path d="M 1050 330 L 1050 360" stroke="#16a085" stroke-width="3" fill="none"/><path d="M 1045 360 L 1050 370 L 1055 360 Z" fill="#16a085"/>
+<rect x="780" y="390" width="540" height="80" rx="8" fill="#ffebee" stroke="#e74c3c" stroke-width="2"/><text x="800" y="420" font-size="14" font-weight="700" fill="#e74c3c">输出 → 测试失败</text><text x="800" y="450" font-size="12" fill="#5a6c7d">Test: "password1!" → expected False, got True</text>
+<path d="M 1050 490 L 1050 520" stroke="#16a085" stroke-width="3" fill="none"/><path d="M 1045 520 L 1050 530 L 1055 520 Z" fill="#16a085"/>
+<rect x="780" y="550" width="540" height="180" rx="8" fill="#fff8e1" stroke="#f39c12" stroke-width="2"/><text x="800" y="580" font-size="14" font-weight="700" fill="#f39c12">Reflexion Prompt（关键）:</text><text x="800" y="605" font-size="12" fill="#2c3e50" font-weight="600">"Previous code:</text><text x="820" y="625" font-size="11" fill="#5a6c7d" font-family="monospace">{之前的代码}</text><text x="800" y="650" font-size="12" fill="#2c3e50" font-weight="600">Test failures:</text><text x="820" y="670" font-size="11" fill="#5a6c7d">缺少大写字母检查</text><text x="800" y="695" font-size="12" fill="#27ae60" font-style="italic">关键：提供具体错误信息</text><text x="800" y="715" font-size="12" fill="#27ae60" font-style="italic">关键：要求分析+改进"</text>
+<path d="M 1050 750 L 1050 780" stroke="#16a085" stroke-width="3" fill="none"/><path d="M 1045 780 L 1050 790 L 1055 780 Z" fill="#16a085"/>
+<rect x="780" y="810" width="540" height="20" rx="8" fill="#e8f5e9" stroke="#27ae60" stroke-width="2"/><text x="1050" y="825" font-size="13" font-weight="700" fill="#27ae60" text-anchor="middle">改进代码 → 测试通过 ✅</text></g>
+
+<rect x="200" y="850" width="1000" height="30" rx="6" fill="#fff8f0" stroke="#ff8c42" stroke-width="1"/><text x="700" y="872" font-size="14" font-weight="600" fill="#2c3e50" text-anchor="middle">💡 提示词模板：Previous: {代码} + Failures: {错误} + "分析并改进" → CLAUDE.md写"测试失败时先分析原因"</text>
+</svg></body></html>

@@ -1,0 +1,237 @@
+<svg width="1600" height="920" viewBox="0 0 1600 920" xmlns="http://www.w3.org/2000/svg">
+<rect width="1600" height="920" fill="white"/>
+
+<!-- Title -->
+<text x="800" y="44" font-size="28" font-weight="700" fill="#1a1a2e" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif" letter-spacing="0.5">Skills：按需加载的知识模块</text>
+<text x="800" y="68" font-size="14" fill="#777" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">CLAUDE.md 全量加载 → Skills 渐进式披露，让 Claude Code 更聪明地使用上下文</text>
+
+<!-- ===== LEFT PANEL ===== -->
+<rect x="24" y="90" width="762" height="560" rx="14" fill="#fffbf0" stroke="#f0dfa0" stroke-width="1" filter="url(#sh)"/>
+<defs>
+  <filter id="sh" x="-5%" y="-5%" width="110%" height="120%">
+    <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#00000014"/>
+  </filter>
+</defs>
+
+<text x="48" y="120" font-size="15" font-weight="700" fill="#1a1a2e" font-family="PingFang SC, Microsoft YaHei, sans-serif">📦 为什么需要 Skills？</text>
+<line x1="48" y1="126" x2="770" y2="126" stroke="rgba(0,0,0,0.07)" stroke-width="2"/>
+
+<!-- Contrast: OLD -->
+<rect x="48" y="136" width="290" height="148" rx="10" fill="white" filter="url(#sh)"/>
+<text x="193" y="158" font-size="12" font-weight="700" fill="#c0392b" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">❌ CLAUDE.md 的局限</text>
+<circle cx="66" cy="178" r="3" fill="#e74c3c"/>
+<text x="76" y="182" font-size="12" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif">始终全量加载到上下文</text>
+<circle cx="66" cy="202" r="3" fill="#e74c3c"/>
+<text x="76" y="206" font-size="12" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif">越写越臃肿，Token 浪费</text>
+<circle cx="66" cy="226" r="3" fill="#e74c3c"/>
+<text x="76" y="230" font-size="12" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif">知识混杂，难以维护</text>
+<circle cx="66" cy="250" r="3" fill="#e74c3c"/>
+<text x="76" y="254" font-size="12" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif">无关内容干扰推理</text>
+
+<!-- Arrow -->
+<text x="360" y="218" font-size="22" fill="#aaa" text-anchor="middle" font-family="sans-serif">→</text>
+
+<!-- Contrast: NEW -->
+<rect x="390" y="136" width="290" height="148" rx="10" fill="white" filter="url(#sh)"/>
+<text x="535" y="158" font-size="12" font-weight="700" fill="#27ae60" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">✅ Skills 的解决方案</text>
+<circle cx="408" cy="178" r="3" fill="#27ae60"/>
+<text x="418" y="182" font-size="12" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif">按需加载，用时才读</text>
+<circle cx="408" cy="202" r="3" fill="#27ae60"/>
+<text x="418" y="206" font-size="12" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif">模块化，职责清晰</text>
+<circle cx="408" cy="226" r="3" fill="#27ae60"/>
+<text x="418" y="230" font-size="12" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif">LLM 推理自动激活</text>
+<circle cx="408" cy="250" r="3" fill="#27ae60"/>
+<text x="418" y="254" font-size="12" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif">可组合、可版本控制</text>
+
+<!-- File structure title -->
+<text x="48" y="308" font-size="13" font-weight="700" fill="#1a1a2e" font-family="PingFang SC, Microsoft YaHei, sans-serif">📁 文件结构（M100 项目示例）</text>
+
+<!-- Code block -->
+<rect x="48" y="318" width="720" height="310" rx="8" fill="#1e1e2e"/>
+<text x="68" y="344" font-size="11.5" fill="#89b4fa" font-family="Courier New, monospace">.claude/skills/</text>
+<text x="68" y="366" font-size="11.5" fill="#cdd6f4" font-family="Courier New, monospace">├── </text>
+<text x="100" y="366" font-size="11.5" fill="#89b4fa" font-family="Courier New, monospace">hardware/</text>
+<text x="68" y="388" font-size="11.5" fill="#cdd6f4" font-family="Courier New, monospace">│   └── </text>
+<text x="116" y="388" font-size="11.5" fill="#a6e3a1" font-family="Courier New, monospace">SKILL.md</text>
+<text x="220" y="388" font-size="11.5" fill="#6c7086" font-family="Courier New, monospace"># M100 架构、tile/memory/event</text>
+<text x="68" y="410" font-size="11.5" fill="#cdd6f4" font-family="Courier New, monospace">├── </text>
+<text x="100" y="410" font-size="11.5" fill="#89b4fa" font-family="Courier New, monospace">debug/</text>
+<text x="68" y="432" font-size="11.5" fill="#cdd6f4" font-family="Courier New, monospace">│   ├── </text>
+<text x="116" y="432" font-size="11.5" fill="#a6e3a1" font-family="Courier New, monospace">SKILL.md</text>
+<text x="220" y="432" font-size="11.5" fill="#6c7086" font-family="Courier New, monospace"># 调试技巧</text>
+<text x="68" y="454" font-size="11.5" fill="#cdd6f4" font-family="Courier New, monospace">│   └── </text>
+<text x="116" y="454" font-size="11.5" fill="#a6e3a1" font-family="Courier New, monospace">cases.md</text>
+<text x="220" y="454" font-size="11.5" fill="#6c7086" font-family="Courier New, monospace"># Reference 引用（按需读取）</text>
+<text x="68" y="476" font-size="11.5" fill="#cdd6f4" font-family="Courier New, monospace">└── </text>
+<text x="100" y="476" font-size="11.5" fill="#89b4fa" font-family="Courier New, monospace">allocator/</text>
+<text x="68" y="498" font-size="11.5" fill="#cdd6f4" font-family="Courier New, monospace">    ├── </text>
+<text x="116" y="498" font-size="11.5" fill="#a6e3a1" font-family="Courier New, monospace">SKILL.md</text>
+<text x="220" y="498" font-size="11.5" fill="#6c7086" font-family="Courier New, monospace"># 地址分配算法</text>
+<text x="68" y="520" font-size="11.5" fill="#cdd6f4" font-family="Courier New, monospace">    └── </text>
+<text x="116" y="520" font-size="11.5" fill="#a6e3a1" font-family="Courier New, monospace">check.py</text>
+<text x="220" y="520" font-size="11.5" fill="#6c7086" font-family="Courier New, monospace"># Script 执行（按需运行）</text>
+<line x1="68" y1="534" x2="750" y2="534" stroke="#6c7086" stroke-width="0.5"/>
+<text x="68" y="552" font-size="11.5" fill="#6c7086" font-family="Courier New, monospace">--- SKILL.md 元数据 ---</text>
+<text x="68" y="574" font-size="11.5" fill="#cba6f7" font-family="Courier New, monospace">---</text>
+<text x="68" y="592" font-size="11.5" fill="#cba6f7" font-family="Courier New, monospace">name: </text>
+<text x="120" y="592" font-size="11.5" fill="#a6e3a1" font-family="Courier New, monospace">hardware</text>
+<text x="68" y="610" font-size="11.5" fill="#cba6f7" font-family="Courier New, monospace">description: </text>
+<text x="160" y="610" font-size="11.5" fill="#a6e3a1" font-family="Courier New, monospace">M100 硬件架构、tile/memory/event 机制</text>
+<text x="68" y="628" font-size="11.5" fill="#cba6f7" font-family="Courier New, monospace">---</text>
+
+<!-- ===== RIGHT PANEL ===== -->
+<rect x="810" y="90" width="766" height="560" rx="14" fill="#f0f7ff" stroke="#b8d8f8" stroke-width="1" filter="url(#sh)"/>
+
+<!-- Flow column -->
+<text x="834" y="120" font-size="15" font-weight="700" fill="#1a1a2e" font-family="PingFang SC, Microsoft YaHei, sans-serif">⚡ Skills 激活流程</text>
+<line x1="834" y1="126" x2="1180" y2="126" stroke="rgba(0,0,0,0.07)" stroke-width="2"/>
+
+<!-- Flow steps -->
+<rect x="854" y="136" width="280" height="38" rx="8" fill="#f9f0ff" stroke="#9c27b0" stroke-width="0" style="stroke-width:0"/>
+<rect x="854" y="136" width="4" height="38" rx="2" fill="#9c27b0"/>
+<text x="994" y="160" font-size="12.5" fill="#333" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">👤 用户提问</text>
+
+<text x="994" y="192" font-size="16" fill="#4a9eff" text-anchor="middle">↓</text>
+
+<rect x="834" y="200" width="320" height="38" rx="8" fill="white" stroke="#4a9eff" stroke-width="0"/>
+<rect x="834" y="200" width="4" height="38" rx="2" fill="#4a9eff"/>
+<text x="994" y="224" font-size="12" fill="#333" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">CC 发送：请求 + Skill 列表（仅 metadata）</text>
+
+<text x="994" y="256" font-size="16" fill="#4a9eff" text-anchor="middle">↓</text>
+
+<rect x="834" y="264" width="320" height="52" rx="8" fill="#e8f4fd"/>
+<rect x="834" y="264" width="4" height="52" rx="2" fill="#1565c0"/>
+<text x="994" y="286" font-size="12.5" font-weight="600" fill="#333" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">🧠 LLM 推理：选择相关 Skill</text>
+<text x="994" y="304" font-size="10.5" fill="#666" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">description 是触发关键，非关键词匹配</text>
+
+<text x="994" y="336" font-size="16" fill="#4a9eff" text-anchor="middle">↓</text>
+
+<rect x="834" y="344" width="320" height="38" rx="8" fill="white"/>
+<rect x="834" y="344" width="4" height="38" rx="2" fill="#4a9eff"/>
+<text x="994" y="368" font-size="12" fill="#333" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">CC 发送：请求 + 完整 SKILL.md</text>
+
+<text x="994" y="400" font-size="16" fill="#4a9eff" text-anchor="middle">↓</text>
+
+<rect x="854" y="408" width="280" height="38" rx="8" fill="#fff3ee"/>
+<rect x="854" y="408" width="4" height="38" rx="2" fill="#ff6b35"/>
+<text x="994" y="432" font-size="12.5" fill="#333" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">🤖 LLM 响应（带完整知识）</text>
+
+<!-- Tip box -->
+<rect x="834" y="458" width="320" height="52" rx="8" fill="rgba(255,255,255,0.7)"/>
+<rect x="834" y="458" width="3" height="52" rx="1" fill="#f59e0b"/>
+<text x="846" y="476" font-size="11" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif">💡 写好 description 比写好内容更重要</text>
+<text x="846" y="494" font-size="10.5" fill="#1565c0" font-family="Courier New, monospace">description: M100 硬件架构、sch_scope 语义...</text>
+
+<!-- Progressive Disclosure column -->
+<text x="1210" y="120" font-size="15" font-weight="700" fill="#1a1a2e" font-family="PingFang SC, Microsoft YaHei, sans-serif">🔍 渐进式披露（三层）</text>
+<line x1="1210" y1="126" x2="1558" y2="126" stroke="rgba(0,0,0,0.07)" stroke-width="2"/>
+
+<!-- Layer 1 -->
+<rect x="1210" y="136" width="346" height="68" rx="8" fill="#fff8e1"/>
+<rect x="1210" y="148" width="52" height="18" rx="4" fill="#f59e0b"/>
+<text x="1236" y="161" font-size="10" font-weight="700" fill="white" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">始终加载</text>
+<text x="1272" y="152" font-size="12" font-weight="700" fill="#222" font-family="PingFang SC, Microsoft YaHei, sans-serif">元数据层：name + description</text>
+<text x="1272" y="170" font-size="11.5" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif">所有 Skill 的 metadata 常驻上下文，供 LLM 选择</text>
+
+<!-- Layer 2 -->
+<rect x="1210" y="216" width="346" height="68" rx="8" fill="#e8f5e9"/>
+<rect x="1210" y="228" width="52" height="18" rx="4" fill="#22c55e"/>
+<text x="1236" y="241" font-size="10" font-weight="700" fill="white" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">按需加载</text>
+<text x="1272" y="232" font-size="12" font-weight="700" fill="#222" font-family="PingFang SC, Microsoft YaHei, sans-serif">指令层：SKILL.md 正文内容</text>
+<text x="1272" y="250" font-size="11.5" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif">被选中后才加载，包含详细知识和操作指南</text>
+
+<!-- Layer 3 -->
+<rect x="1210" y="296" width="346" height="68" rx="8" fill="#e3f2fd"/>
+<rect x="1210" y="308" width="72" height="18" rx="4" fill="#3b82f6"/>
+<text x="1246" y="321" font-size="10" font-weight="700" fill="white" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">按需中的按需</text>
+<text x="1292" y="312" font-size="12" font-weight="700" fill="#222" font-family="PingFang SC, Microsoft YaHei, sans-serif">资源层：Reference + Script</text>
+<text x="1292" y="330" font-size="11.5" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif">SKILL.md 内条件触发，最深层的知识</text>
+
+<!-- Example box -->
+<rect x="1210" y="376" width="346" height="90" rx="8" fill="rgba(255,255,255,0.7)"/>
+<text x="1222" y="396" font-size="11" font-weight="700" fill="#333" font-family="PingFang SC, Microsoft YaHei, sans-serif">M100 示例：/debug Skill</text>
+<text x="1222" y="416" font-size="11" fill="#666" font-family="PingFang SC, Microsoft YaHei, sans-serif">📄 SKILL.md → 调试方法论（指令层）</text>
+<text x="1222" y="434" font-size="11" fill="#666" font-family="PingFang SC, Microsoft YaHei, sans-serif">📎 Reference: cases.md → 历史案例（仅提到"案例"时读取）</text>
+<text x="1222" y="452" font-size="11" fill="#666" font-family="PingFang SC, Microsoft YaHei, sans-serif">🔧 Script: check.py → 地址检查（仅提到"检查地址"时运行）</text>
+
+<!-- ===== BOTTOM ROW: 5 cards ===== -->
+<!-- Card 1: 自动激活 -->
+<rect x="24" y="666" width="296" height="230" rx="12" fill="#fff8e1" stroke="#f0d060" stroke-width="1" filter="url(#sh)"/>
+<text x="44" y="694" font-size="13" font-weight="700" fill="#b45309" font-family="PingFang SC, Microsoft YaHei, sans-serif">🎯 自动激活</text>
+<text x="44" y="716" font-size="12" font-weight="700" fill="#333" font-family="PingFang SC, Microsoft YaHei, sans-serif">description 是触发关键，</text>
+<text x="44" y="734" font-size="12" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif">Claude 用 LLM 推理决定是否激活，</text>
+<text x="44" y="752" font-size="12" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif">不是关键词匹配。</text>
+<rect x="44" y="764" width="256" height="116" rx="6" fill="rgba(255,255,255,0.6)"/>
+<rect x="44" y="764" width="2" height="116" fill="rgba(0,0,0,0.15)"/>
+<text x="54" y="784" font-size="11.5" fill="#666" font-family="PingFang SC, Microsoft YaHei, sans-serif">❌ </text>
+<rect x="70" y="772" width="210" height="18" rx="4" fill="rgba(0,0,0,0.08)"/>
+<text x="76" y="785" font-size="10.5" fill="#333" font-family="Courier New, monospace">description: 硬件</text>
+<text x="54" y="812" font-size="11.5" fill="#666" font-family="PingFang SC, Microsoft YaHei, sans-serif">✅ </text>
+<rect x="70" y="800" width="220" height="32" rx="4" fill="rgba(0,0,0,0.08)"/>
+<text x="76" y="813" font-size="10" fill="#333" font-family="Courier New, monospace">description: M100 硬件架构、</text>
+<text x="76" y="827" font-size="10" fill="#333" font-family="Courier New, monospace">sch_scope 语义、tile/memory/event</text>
+
+<!-- Card 2: Skills 组合 -->
+<rect x="336" y="666" width="296" height="230" rx="12" fill="#f0fdf4" stroke="#86efac" stroke-width="1" filter="url(#sh)"/>
+<text x="356" y="694" font-size="13" font-weight="700" fill="#166534" font-family="PingFang SC, Microsoft YaHei, sans-serif">🔗 Skills 组合</text>
+<text x="356" y="716" font-size="12" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif">创建<tspan font-weight="700">元 Skill</tspan> 编排多个 Skills，</text>
+<text x="356" y="734" font-size="12" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif">Skills 之间可以互相引用。</text>
+<rect x="356" y="748" width="256" height="132" rx="6" fill="rgba(255,255,255,0.6)"/>
+<rect x="356" y="748" width="2" height="132" fill="rgba(0,0,0,0.15)"/>
+<rect x="366" y="758" width="48" height="16" rx="4" fill="rgba(0,0,0,0.08)"/>
+<text x="372" y="770" font-size="10.5" fill="#333" font-family="Courier New, monospace">/test</text>
+<text x="420" y="770" font-size="11.5" fill="#666" font-family="PingFang SC, Microsoft YaHei, sans-serif"> = 编译 + 运行 + 校验</text>
+<text x="366" y="792" font-size="11.5" fill="#666" font-family="PingFang SC, Microsoft YaHei, sans-serif">内部引用 </text>
+<rect x="430" y="780" width="48" height="16" rx="4" fill="rgba(0,0,0,0.08)"/>
+<text x="436" y="792" font-size="10.5" fill="#333" font-family="Courier New, monospace">/verify</text>
+<rect x="484" y="780" width="48" height="16" rx="4" fill="rgba(0,0,0,0.08)"/>
+<text x="490" y="792" font-size="10.5" fill="#333" font-family="Courier New, monospace">/debug</text>
+<text x="366" y="816" font-size="11.5" fill="#666" font-family="PingFang SC, Microsoft YaHei, sans-serif">不懂 sch_scope？看 </text>
+<rect x="476" y="804" width="64" height="16" rx="4" fill="rgba(0,0,0,0.08)"/>
+<text x="482" y="816" font-size="10.5" fill="#333" font-family="Courier New, monospace">/hardware</text>
+
+<!-- Card 3: Reference & Script -->
+<rect x="648" y="666" width="296" height="230" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="1" filter="url(#sh)"/>
+<text x="668" y="694" font-size="13" font-weight="700" fill="#1d4ed8" font-family="PingFang SC, Microsoft YaHei, sans-serif">📎 Reference &amp; Script</text>
+<text x="668" y="716" font-size="12" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif"><tspan font-weight="700">Reference</tspan>：条件触发，读取文件（只读）</text>
+<text x="668" y="734" font-size="12" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif"><tspan font-weight="700">Script</tspan>：条件触发，执行脚本（只跑）</text>
+<rect x="668" y="748" width="256" height="132" rx="6" fill="rgba(255,255,255,0.6)"/>
+<rect x="668" y="748" width="2" height="132" fill="rgba(0,0,0,0.15)"/>
+<text x="678" y="770" font-size="11.5" fill="#666" font-family="PingFang SC, Microsoft YaHei, sans-serif">提到"历史案例" → 读取 </text>
+<rect x="800" y="758" width="60" height="16" rx="4" fill="rgba(0,0,0,0.08)"/>
+<text x="806" y="770" font-size="10.5" fill="#333" font-family="Courier New, monospace">cases.md</text>
+<text x="678" y="796" font-size="11.5" fill="#666" font-family="PingFang SC, Microsoft YaHei, sans-serif">提到"检查地址" → 运行 </text>
+<rect x="800" y="784" width="56" height="16" rx="4" fill="rgba(0,0,0,0.08)"/>
+<text x="806" y="796" font-size="10.5" fill="#333" font-family="Courier New, monospace">check.py</text>
+
+<!-- Card 4: Memory 联动 -->
+<rect x="960" y="666" width="296" height="230" rx="12" fill="#fdf4ff" stroke="#d8b4fe" stroke-width="1" filter="url(#sh)"/>
+<text x="980" y="694" font-size="13" font-weight="700" fill="#7e22ce" font-family="PingFang SC, Microsoft YaHei, sans-serif">🧠 Memory 联动</text>
+<text x="980" y="716" font-size="12" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif">Skills 可以引用 Memory，</text>
+<text x="980" y="734" font-size="12" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif">形成<tspan font-weight="700">知识飞轮</tspan>：</text>
+<text x="980" y="752" font-size="11.5" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif">解决问题 → 沉淀到 Memory → Skill 引用 → 下次更快</text>
+<rect x="980" y="764" width="256" height="116" rx="6" fill="rgba(255,255,255,0.6)"/>
+<rect x="980" y="764" width="2" height="116" fill="rgba(0,0,0,0.15)"/>
+<rect x="990" y="774" width="48" height="16" rx="4" fill="rgba(0,0,0,0.08)"/>
+<text x="996" y="786" font-size="10.5" fill="#333" font-family="Courier New, monospace">/debug</text>
+<text x="1044" y="786" font-size="11.5" fill="#666" font-family="PingFang SC, Microsoft YaHei, sans-serif"> SKILL.md 中：</text>
+<text x="990" y="808" font-size="11" fill="#666" font-family="PingFang SC, Microsoft YaHei, sans-serif">"查看 MEMORY.md 中的常见陷阱速查"</text>
+
+<!-- Card 5: CLAUDE.md 索引 -->
+<rect x="1272" y="666" width="304" height="230" rx="12" fill="#fff1f2" stroke="#fca5a5" stroke-width="1" filter="url(#sh)"/>
+<text x="1292" y="694" font-size="13" font-weight="700" fill="#991b1b" font-family="PingFang SC, Microsoft YaHei, sans-serif">📋 CLAUDE.md 索引</text>
+<text x="1292" y="716" font-size="12" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif">CLAUDE.md 保持<tspan font-weight="700">精简</tspan>，只放 Skills 索引，</text>
+<text x="1292" y="734" font-size="12" fill="#555" font-family="PingFang SC, Microsoft YaHei, sans-serif">详细知识全部下沉到 Skills：</text>
+<rect x="1292" y="748" width="264" height="132" rx="6" fill="rgba(255,255,255,0.6)"/>
+<rect x="1292" y="748" width="2" height="132" fill="rgba(0,0,0,0.15)"/>
+<rect x="1302" y="758" width="72" height="16" rx="4" fill="rgba(0,0,0,0.08)"/>
+<text x="1308" y="770" font-size="10.5" fill="#333" font-family="Courier New, monospace">/hardware</text>
+<text x="1380" y="770" font-size="11.5" fill="#666" font-family="PingFang SC, Microsoft YaHei, sans-serif"> - 硬件架构</text>
+<rect x="1302" y="782" width="72" height="16" rx="4" fill="rgba(0,0,0,0.08)"/>
+<text x="1308" y="794" font-size="10.5" fill="#333" font-family="Courier New, monospace">/attention</text>
+<text x="1380" y="794" font-size="11.5" fill="#666" font-family="PingFang SC, Microsoft YaHei, sans-serif"> - Attention 流程</text>
+<rect x="1302" y="806" width="48" height="16" rx="4" fill="rgba(0,0,0,0.08)"/>
+<text x="1308" y="818" font-size="10.5" fill="#333" font-family="Courier New, monospace">/debug</text>
+<text x="1356" y="818" font-size="11.5" fill="#666" font-family="PingFang SC, Microsoft YaHei, sans-serif"> - 调试技巧</text>
+
+</svg>

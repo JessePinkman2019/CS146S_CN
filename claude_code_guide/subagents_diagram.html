@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>Subagents——让 Claude 分身处理复杂任务</title>
+<style>
+  body { margin: 0; padding: 20px; background: #f0f2f5; display: flex; justify-content: center; font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+</style>
+</head>
+<body>
+<svg width="1200" height="820" viewBox="0 0 1200 820" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <filter id="sh" x="-10%" y="-10%" width="120%" height="130%">
+    <feDropShadow dx="0" dy="2" stdDeviation="5" flood-color="#00000015"/>
+  </filter>
+  <filter id="sh-sm" x="-8%" y="-8%" width="116%" height="124%">
+    <feDropShadow dx="0" dy="1" stdDeviation="3" flood-color="#00000010"/>
+  </filter>
+  <filter id="sh-md" x="-10%" y="-10%" width="120%" height="130%">
+    <feDropShadow dx="0" dy="3" stdDeviation="7" flood-color="#00000022"/>
+  </filter>
+  <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+    <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#f0f2f8" stroke-width="0.5"/>
+  </pattern>
+  <marker id="arr" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto">
+    <path d="M0,0 L9,4 L0,8" fill="none" stroke="#7788aa" stroke-width="1.5"/>
+  </marker>
+  <marker id="arr-ret" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto">
+    <path d="M0,0 L9,4 L0,8" fill="none" stroke="#2a9a5a" stroke-width="1.5"/>
+  </marker>
+  <marker id="arr-blue" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto">
+    <path d="M0,0 L9,4 L0,8" fill="none" stroke="#3366cc" stroke-width="1.5"/>
+  </marker>
+</defs>
+
+<rect width="1200" height="820" fill="#ffffff"/>
+<rect width="1200" height="820" fill="url(#grid)"/>
+
+<!-- TITLE -->
+<text x="600" y="38" text-anchor="middle" font-size="22" font-weight="bold" fill="#1a2a4a">Subagents——让 Claude 分身处理复杂任务</text>
+<text x="600" y="60" text-anchor="middle" font-size="13" fill="#7788aa">每个 Subagent 在独立 context 中运行，保护主对话不被污染</text>
+<line x1="320" y1="68" x2="880" y2="68" stroke="#d0daf0" stroke-width="1"/>
+
+<!-- ===== LEFT: 为什么需要 + 核心机制 ===== -->
+<rect x="18" y="76" width="360" height="732" rx="12" fill="#f8faff" stroke="#d0daf0" stroke-width="1.5" filter="url(#sh-sm)"/>
+<text x="198" y="100" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a2a4a">为什么需要 Subagents？</text>
+<line x1="38" y1="108" x2="360" y2="108" stroke="#d0daf0" stroke-width="1"/>
+
+<!-- Core problem -->
+<rect x="30" y="116" width="336" height="90" rx="10" fill="#fff8ee" stroke="#f0c060" stroke-width="1.5" filter="url(#sh-sm)"/>
+<rect x="30" y="116" width="6" height="90" rx="3" fill="#f0a030"/>
+<text x="50" y="138" font-size="11" font-weight="bold" fill="#aa6600">⚠  根本约束</text>
+<text x="50" y="158" font-size="10.5" fill="#664400">Context 是有限资源，填满则性能下降</text>
+<text x="50" y="176" font-size="10.5" fill="#664400">调试、探索、测试都是高消耗操作</text>
+<text x="50" y="194" font-size="10" fill="#cc6600">→ Subagent 隔离消耗，主对话保持干净</text>
+
+<!-- 5 values -->
+<text x="38" y="226" font-size="11" font-weight="bold" fill="#1a2a4a">五大价值</text>
+<rect x="30" y="232" width="336" height="34" rx="7" fill="#eef3ff" stroke="#b8ccf0" stroke-width="1"/>
+<text x="50" y="248" font-size="10.5" fill="#3355aa">🛡  保留主 context</text>
+<text x="200" y="248" font-size="10" fill="#556699">探索结果不污染主对话</text>
+<text x="50" y="260" font-size="10" fill="#556699">高消耗操作只返回摘要</text>
+
+<rect x="30" y="270" width="336" height="34" rx="7" fill="#edfaf2" stroke="#80d098" stroke-width="1"/>
+<text x="50" y="286" font-size="10.5" fill="#1a6a3a">⚡  并行执行</text>
+<text x="200" y="286" font-size="10" fill="#2a7a4a">多模块同时调查</text>
+<text x="50" y="298" font-size="10" fill="#2a7a4a">互不干扰，速度翻倍</text>
+
+<rect x="30" y="308" width="336" height="34" rx="7" fill="#f5eeff" stroke="#c8a0e8" stroke-width="1"/>
+<text x="50" y="324" font-size="10.5" fill="#6622aa">🔒  强制约束</text>
+<text x="200" y="324" font-size="10" fill="#7733bb">只读 subagent 无法写文件</text>
+<text x="50" y="336" font-size="10" fill="#7733bb">安全可控，防止误操作</text>
+
+<rect x="30" y="346" width="336" height="34" rx="7" fill="#fff2f2" stroke="#f0a0a0" stroke-width="1"/>
+<text x="50" y="362" font-size="10.5" fill="#aa3333">💰  控制成本</text>
+<text x="200" y="362" font-size="10" fill="#883333">简单任务路由到 Haiku</text>
+<text x="50" y="374" font-size="10" fill="#883333">复杂任务才用 Opus</text>
+
+<rect x="30" y="384" width="336" height="34" rx="7" fill="#fff8ee" stroke="#f0c878" stroke-width="1"/>
+<text x="50" y="400" font-size="10.5" fill="#aa6600">♻  跨项目复用</text>
+<text x="200" y="400" font-size="10" fill="#886600">~/.claude/agents/ 全局可用</text>
+<text x="50" y="412" font-size="10" fill="#886600">一次定义，所有项目共享</text>
+
+<!-- How it works -->
+<text x="38" y="442" font-size="11" font-weight="bold" fill="#1a2a4a">工作机制</text>
+<rect x="30" y="450" width="336" height="130" rx="10" fill="#f0f4ff" stroke="#b0c4ee" stroke-width="1.5" filter="url(#sh-sm)"/>
+
+<!-- Main conversation box -->
+<rect x="46" y="462" width="140" height="32" rx="6" fill="#3366cc"/>
+<text x="116" y="482" text-anchor="middle" font-size="10.5" fill="#fff" font-weight="bold">主对话</text>
+
+<!-- Arrow down -->
+<line x1="116" y1="494" x2="116" y2="514" stroke="#7788aa" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="130" y="508" font-size="9" fill="#7788aa">委托任务</text>
+
+<!-- Subagent box -->
+<rect x="46" y="516" width="140" height="32" rx="6" fill="#1a9a60"/>
+<text x="116" y="536" text-anchor="middle" font-size="10.5" fill="#fff" font-weight="bold">Subagent</text>
+
+<!-- Arrow back -->
+<line x1="116" y1="548" x2="116" y2="568" stroke="#2a9a5a" stroke-width="1.5" marker-end="url(#arr-ret)"/>
+<text x="130" y="562" font-size="9" fill="#2a9a5a">返回摘要</text>
+
+<!-- Independent context label -->
+<rect x="210" y="470" width="140" height="90" rx="6" fill="#1e1e2e"/>
+<text x="280" y="490" text-anchor="middle" font-size="9" fill="#6c7086">独立 context</text>
+<text x="280" y="508" text-anchor="middle" font-size="9" fill="#a6e3a1">读了 50 个文件</text>
+<text x="280" y="524" text-anchor="middle" font-size="9" fill="#a6e3a1">跑了测试套件</text>
+<text x="280" y="540" text-anchor="middle" font-size="9" fill="#a6e3a1">分析了日志</text>
+<text x="280" y="556" text-anchor="middle" font-size="9" fill="#6c7086">↑ 不进主 context</text>
+
+<!-- File structure -->
+<text x="38" y="604" font-size="11" font-weight="bold" fill="#1a2a4a">定义文件结构</text>
+<rect x="30" y="612" width="336" height="180" rx="10" fill="#1e1e2e" filter="url(#sh-sm)"/>
+<text x="46" y="630" font-size="10" font-family="'Courier New',monospace">
+  <tspan fill="#6c7086"># .claude/agents/debugger.md</tspan>
+</text>
+<text x="46" y="646" font-size="10" font-family="'Courier New',monospace">
+  <tspan fill="#cba6f7">---</tspan>
+</text>
+<text x="46" y="662" font-size="10" font-family="'Courier New',monospace">
+  <tspan fill="#cba6f7">name: </tspan><tspan fill="#a6e3a1">debugger</tspan>
+</text>
+<text x="46" y="678" font-size="10" font-family="'Courier New',monospace">
+  <tspan fill="#cba6f7">description: </tspan><tspan fill="#a6e3a1">调试专家，遇到错误时使用</tspan>
+</text>
+<text x="46" y="694" font-size="10" font-family="'Courier New',monospace">
+  <tspan fill="#cba6f7">tools: </tspan><tspan fill="#a6e3a1">Read, Edit, Bash, Grep</tspan>
+</text>
+<text x="46" y="712" font-size="10" font-family="'Courier New',monospace">
+  <tspan fill="#cba6f7">model: </tspan><tspan fill="#a6e3a1">sonnet</tspan>
+</text>
+<text x="46" y="728" font-size="10" font-family="'Courier New',monospace">
+  <tspan fill="#cba6f7">---</tspan>
+</text>
+<text x="46" y="744" font-size="10" font-family="'Courier New',monospace">
+  <tspan fill="#cdd6f4">You are an expert debugger...</tspan>
+</text>
+
+<!-- Scope -->
+<rect x="30" y="754" width="336" height="42" rx="8" fill="#f0f4ff" stroke="#b0c4ee" stroke-width="1" filter="url(#sh-sm)"/>
+<text x="46" y="772" font-size="10" fill="#334477">📁 <tspan font-family="'Courier New',monospace">.claude/agents/</tspan>  项目级，进 git</text>
+<text x="46" y="788" font-size="10" fill="#334477">📁 <tspan font-family="'Courier New',monospace">~/.claude/agents/</tspan>  个人全局</text>
+
+<!-- ===== CENTER: 内置 Subagents ===== -->
+<rect x="394" y="76" width="390" height="732" rx="12" fill="#f5f8ff" stroke="#b8ccf0" stroke-width="2" filter="url(#sh-md)"/>
+<text x="589" y="100" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a2a4a">内置 Subagents</text>
+<text x="589" y="116" text-anchor="middle" font-size="11" fill="#9aabcc">Claude 自动调用，无需手动触发</text>
+<line x1="414" y1="124" x2="764" y2="124" stroke="#c8d8f0" stroke-width="1"/>
+
+<!-- Explore -->
+<rect x="406" y="132" width="366" height="110" rx="10" fill="#fff8ee" stroke="#f0c060" stroke-width="1.5" filter="url(#sh-sm)"/>
+<rect x="406" y="132" width="6" height="110" rx="3" fill="#f0a030"/>
+<rect x="420" y="140" width="60" height="20" rx="5" fill="#f0a030"/>
+<text x="450" y="154" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">Explore</text>
+<rect x="490" y="140" width="50" height="20" rx="5" fill="#fff4dd" stroke="#f0c060" stroke-width="1"/>
+<text x="515" y="154" text-anchor="middle" font-size="9.5" fill="#aa6600">Haiku</text>
+<rect x="550" y="140" width="50" height="20" rx="5" fill="#fff4dd" stroke="#f0c060" stroke-width="1"/>
+<text x="575" y="154" text-anchor="middle" font-size="9.5" fill="#aa6600">只读</text>
+<text x="420" y="178" font-size="10.5" fill="#664400">代码搜索、文件探索、代码库分析</text>
+<text x="420" y="196" font-size="10" fill="#886600">Claude 需要理解代码但不修改时自动调用</text>
+<text x="420" y="214" font-size="10" fill="#886600">探索结果保留在 subagent context，不污染主对话</text>
+<text x="420" y="232" font-size="9.5" fill="#cc8800" font-style="italic">quick / medium / very thorough 三档彻底程度</text>
+
+<!-- Plan -->
+<rect x="406" y="250" width="366" height="100" rx="10" fill="#f5eeff" stroke="#c8a0e8" stroke-width="1.5" filter="url(#sh-sm)"/>
+<rect x="406" y="250" width="6" height="100" rx="3" fill="#8844cc"/>
+<rect x="420" y="258" width="40" height="20" rx="5" fill="#8844cc"/>
+<text x="440" y="272" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">Plan</text>
+<rect x="470" y="258" width="50" height="20" rx="5" fill="#f0e8ff" stroke="#c8a0e8" stroke-width="1"/>
+<text x="495" y="272" text-anchor="middle" font-size="9.5" fill="#6622aa">继承</text>
+<rect x="530" y="258" width="50" height="20" rx="5" fill="#f0e8ff" stroke="#c8a0e8" stroke-width="1"/>
+<text x="555" y="272" text-anchor="middle" font-size="9.5" fill="#6622aa">只读</text>
+<text x="420" y="296" font-size="10.5" fill="#441a88">Plan Mode 下的代码库研究代理</text>
+<text x="420" y="314" font-size="10" fill="#6633aa">在呈现计划前收集上下文，防止无限嵌套</text>
+<text x="420" y="332" font-size="9.5" fill="#8844cc" font-style="italic">subagents 不能生成其他 subagents</text>
+
+<!-- General-purpose -->
+<rect x="406" y="358" width="366" height="100" rx="10" fill="#edfaf2" stroke="#80d098" stroke-width="1.5" filter="url(#sh-sm)"/>
+<rect x="406" y="358" width="6" height="100" rx="3" fill="#1a9a60"/>
+<rect x="420" y="366" width="100" height="20" rx="5" fill="#1a9a60"/>
+<text x="470" y="380" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">General-purpose</text>
+<rect x="530" y="366" width="50" height="20" rx="5" fill="#d8f5e8" stroke="#80d098" stroke-width="1"/>
+<text x="555" y="380" text-anchor="middle" font-size="9.5" fill="#1a6a3a">继承</text>
+<rect x="590" y="366" width="50" height="20" rx="5" fill="#d8f5e8" stroke="#80d098" stroke-width="1"/>
+<text x="615" y="380" text-anchor="middle" font-size="9.5" fill="#1a6a3a">全部</text>
+<text x="420" y="404" font-size="10.5" fill="#1a4a2a">复杂多步骤任务，需要探索 + 修改</text>
+<text x="420" y="422" font-size="10" fill="#2a6a3a">复杂推理、多个相关步骤时自动委托</text>
+<text x="420" y="440" font-size="9.5" fill="#1a8a4a" font-style="italic">最强大的内置 subagent</text>
+
+<!-- Other built-ins table -->
+<rect x="406" y="466" width="366" height="90" rx="10" fill="#f8faff" stroke="#d0daf0" stroke-width="1" filter="url(#sh-sm)"/>
+<text x="420" y="484" font-size="10.5" font-weight="bold" fill="#334477">其他内置（自动调用）</text>
+<line x1="420" y1="490" x2="760" y2="490" stroke="#d0daf0" stroke-width="0.8"/>
+<text x="420" y="506" font-size="10" fill="#555">Bash</text>
+<text x="480" y="506" font-size="10" fill="#777">在独立 context 中运行终端命令</text>
+<text x="420" y="522" font-size="10" fill="#555">statusline-setup</text>
+<text x="520" y="522" font-size="10" fill="#777">运行 /statusline 时调用</text>
+<text x="420" y="538" font-size="10" fill="#555">Claude Code Guide</text>
+<text x="540" y="538" font-size="10" fill="#777">回答 Claude Code 使用问题</text>
+<text x="420" y="548" font-size="9.5" fill="#9aabcc" font-style="italic">（你现在看到的这个对话就在用它）</text>
+
+<!-- When to use subagent vs main -->
+<rect x="406" y="564" width="366" height="232" rx="10" fill="#f8faff" stroke="#d0daf0" stroke-width="1.5" filter="url(#sh-sm)"/>
+<text x="589" y="584" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a2a4a">Subagent vs 主对话</text>
+<line x1="420" y1="592" x2="760" y2="592" stroke="#d0daf0" stroke-width="0.8"/>
+
+<rect x="416" y="600" width="166" height="184" rx="8" fill="#edfaf2" stroke="#80d098" stroke-width="1"/>
+<text x="499" y="618" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#1a6a3a">✅ 用 Subagent</text>
+<text x="426" y="636" font-size="10" fill="#1a4a2a">• 产生大量输出</text>
+<text x="426" y="652" font-size="10" fill="#1a4a2a">• 需要工具限制</text>
+<text x="426" y="668" font-size="10" fill="#1a4a2a">• 任务自包含</text>
+<text x="426" y="684" font-size="10" fill="#1a4a2a">• 可以返回摘要</text>
+<text x="426" y="700" font-size="10" fill="#1a4a2a">• 并行调查</text>
+<text x="426" y="720" font-size="9.5" fill="#2a8a4a" font-style="italic">探索、测试、调试</text>
+<text x="426" y="736" font-size="9.5" fill="#2a8a4a" font-style="italic">代码审查、安全扫描</text>
+
+<rect x="590" y="600" width="166" height="184" rx="8" fill="#fff2f2" stroke="#f0a0a0" stroke-width="1"/>
+<text x="673" y="618" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#aa3333">❌ 用主对话</text>
+<text x="600" y="636" font-size="10" fill="#883333">• 频繁来回迭代</text>
+<text x="600" y="652" font-size="10" fill="#883333">• 多阶段共享上下文</text>
+<text x="600" y="668" font-size="10" fill="#883333">• 快速小范围修改</text>
+<text x="600" y="684" font-size="10" fill="#883333">• 延迟敏感</text>
+<text x="600" y="700" font-size="10" fill="#883333">• 需要频繁纠正</text>
+<text x="600" y="720" font-size="9.5" fill="#cc4444" font-style="italic">规划→实现→测试</text>
+<text x="600" y="736" font-size="9.5" fill="#cc4444" font-style="italic">整体流程协作</text>
+
+<!-- ===== RIGHT: 三种使用模式 ===== -->
+<rect x="800" y="76" width="382" height="732" rx="12" fill="#f8faff" stroke="#d0daf0" stroke-width="1.5" filter="url(#sh-sm)"/>
+<text x="991" y="100" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a2a4a">三种核心模式</text>
+<line x1="820" y1="108" x2="1164" y2="108" stroke="#d0daf0" stroke-width="1"/>
+
+<!-- Pattern 1: 隔离高容量操作 -->
+<rect x="812" y="116" width="358" height="196" rx="10" fill="#fff8ee" stroke="#f0c060" stroke-width="1.5" filter="url(#sh-sm)"/>
+<rect x="812" y="116" width="358" height="36" rx="10" fill="#f0a030"/>
+<rect x="812" y="136" width="358" height="16" fill="#f0a030"/>
+<text x="991" y="139" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">① 隔离高容量操作</text>
+<text x="828" y="168" font-size="10.5" fill="#664400">测试、日志、文档——产生大量输出</text>
+<text x="828" y="186" font-size="10.5" fill="#664400">放入 subagent，只返回关键摘要</text>
+
+<!-- Visual: before/after context -->
+<rect x="828" y="196" width="150" height="96" rx="6" fill="#fff2f2" stroke="#f0a0a0" stroke-width="1"/>
+<text x="903" y="212" text-anchor="middle" font-size="9.5" fill="#aa3333">❌ 不用 subagent</text>
+<rect x="836" y="218" width="134" height="12" rx="3" fill="#f0a0a0"/>
+<text x="903" y="228" text-anchor="middle" font-size="8" fill="#883333">测试输出 3000 行</text>
+<rect x="836" y="234" width="134" height="12" rx="3" fill="#f0a0a0"/>
+<text x="903" y="244" text-anchor="middle" font-size="8" fill="#883333">日志分析 2000 行</text>
+<rect x="836" y="250" width="134" height="12" rx="3" fill="#f0a0a0"/>
+<text x="903" y="260" text-anchor="middle" font-size="8" fill="#883333">主对话 context 爆满</text>
+<text x="903" y="282" text-anchor="middle" font-size="8.5" fill="#cc4444">性能下降 ↓</text>
+
+<rect x="990" y="196" width="164" height="96" rx="6" fill="#edfaf2" stroke="#80d098" stroke-width="1"/>
+<text x="1072" y="212" text-anchor="middle" font-size="9.5" fill="#1a6a3a">✅ 用 subagent</text>
+<rect x="998" y="218" width="148" height="12" rx="3" fill="#a0e8c0"/>
+<text x="1072" y="228" text-anchor="middle" font-size="8" fill="#1a4a2a">subagent 处理全部输出</text>
+<rect x="998" y="234" width="148" height="12" rx="3" fill="#a0e8c0"/>
+<text x="1072" y="244" text-anchor="middle" font-size="8" fill="#1a4a2a">主对话只收 3 行摘要</text>
+<rect x="998" y="250" width="148" height="12" rx="3" fill="#d8f5e8"/>
+<text x="1072" y="260" text-anchor="middle" font-size="8" fill="#1a4a2a">主 context 保持干净</text>
+<text x="1072" y="282" text-anchor="middle" font-size="8.5" fill="#1a8a4a">性能稳定 ✓</text>
+
+<!-- Pattern 2: 并行研究 -->
+<rect x="812" y="320" width="358" height="210" rx="10" fill="#eef3ff" stroke="#b8ccf0" stroke-width="1.5" filter="url(#sh-sm)"/>
+<rect x="812" y="320" width="358" height="36" rx="10" fill="#3366cc"/>
+<rect x="812" y="340" width="358" height="16" fill="#3366cc"/>
+<text x="991" y="343" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">② 并行研究</text>
+<text x="828" y="372" font-size="10.5" fill="#334477">多个独立模块同时调查，速度翻倍</text>
+
+<!-- Parallel visual -->
+<rect x="828" y="384" width="326" height="130" rx="8" fill="#f0f4ff" stroke="#c0d0f0" stroke-width="1"/>
+<!-- Main -->
+<rect x="928" y="392" width="100" height="24" rx="5" fill="#3366cc"/>
+<text x="978" y="408" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">主对话</text>
+<!-- Three arrows down -->
+<line x1="938" y1="416" x2="878" y2="440" stroke="#7788aa" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="978" y1="416" x2="978" y2="440" stroke="#7788aa" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="1018" y1="416" x2="1078" y2="440" stroke="#7788aa" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- Three subagents -->
+<rect x="840" y="440" width="76" height="24" rx="5" fill="#1a9a60"/>
+<text x="878" y="456" text-anchor="middle" font-size="9" fill="#fff">attention</text>
+<rect x="940" y="440" width="76" height="24" rx="5" fill="#1a9a60"/>
+<text x="978" y="456" text-anchor="middle" font-size="9" fill="#fff">moe</text>
+<rect x="1040" y="440" width="76" height="24" rx="5" fill="#1a9a60"/>
+<text x="1078" y="456" text-anchor="middle" font-size="9" fill="#fff">allocator</text>
+<!-- Return arrows -->
+<line x1="878" y1="464" x2="938" y2="488" stroke="#2a9a5a" stroke-width="1.5" marker-end="url(#arr-ret)"/>
+<line x1="978" y1="464" x2="978" y2="488" stroke="#2a9a5a" stroke-width="1.5" marker-end="url(#arr-ret)"/>
+<line x1="1078" y1="464" x2="1018" y2="488" stroke="#2a9a5a" stroke-width="1.5" marker-end="url(#arr-ret)"/>
+<text x="978" y="504" text-anchor="middle" font-size="9" fill="#2a6a3a">综合三份摘要</text>
+
+<!-- Pattern 3: 链式工作流 -->
+<rect x="812" y="538" width="358" height="210" rx="10" fill="#f2fbf5" stroke="#80d098" stroke-width="1.5" filter="url(#sh-sm)"/>
+<rect x="812" y="538" width="358" height="36" rx="10" fill="#1a9a60"/>
+<rect x="812" y="558" width="358" height="16" fill="#1a9a60"/>
+<text x="991" y="561" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">③ 链式工作流</text>
+<text x="828" y="590" font-size="10.5" fill="#1a4a2a">多步骤任务，subagent 顺序接力</text>
+
+<!-- Chain visual -->
+<rect x="828" y="602" width="326" height="130" rx="8" fill="#e8f8ee" stroke="#a0d8b0" stroke-width="1"/>
+<rect x="836" y="612" width="90" height="24" rx="5" fill="#3366cc"/>
+<text x="881" y="628" text-anchor="middle" font-size="9" fill="#fff">code-reviewer</text>
+<line x1="926" y1="624" x2="946" y2="624" stroke="#7788aa" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="936" y="648" font-size="8" fill="#7788aa">发现问题</text>
+<rect x="946" y="612" width="80" height="24" rx="5" fill="#1a9a60"/>
+<text x="986" y="628" text-anchor="middle" font-size="9" fill="#fff">debugger</text>
+<line x1="1026" y1="624" x2="1046" y2="624" stroke="#7788aa" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="1036" y="648" font-size="8" fill="#7788aa">修复后</text>
+<rect x="1046" y="612" width="90" height="24" rx="5" fill="#8844cc"/>
+<text x="1091" y="628" text-anchor="middle" font-size="9" fill="#fff">test-runner</text>
+
+<text x="991" y="660" text-anchor="middle" font-size="10" fill="#1a4a2a">M100 示例：</text>
+<text x="828" y="678" font-size="10" fill="#1a4a2a">explore → 理解地址分配</text>
+<text x="828" y="694" font-size="10" fill="#1a4a2a">→ 修改 __at() 声明</text>
+<text x="828" y="710" font-size="10" fill="#1a4a2a">→ 运行 compare.py 验证对齐</text>
+
+<!-- Bottom tip -->
+<rect x="812" y="756" width="358" height="40" rx="8" fill="#f0f4ff" stroke="#b0c4ee" stroke-width="1" filter="url(#sh-sm)"/>
+<text x="828" y="774" font-size="10" fill="#334477">💡 用 <tspan font-family="'Courier New',monospace">/agents</tspan> 命令交互式创建和管理 subagents</text>
+<text x="828" y="788" font-size="10" fill="#334477">Claude 根据 <tspan font-weight="bold">description</tspan> 自动决定何时委托</text>
+
+</svg>
+</body>
+</html>

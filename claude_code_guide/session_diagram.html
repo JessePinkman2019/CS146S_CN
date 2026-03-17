@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>有效对话与会话管理</title>
+<style>
+  body { margin: 0; padding: 20px; background: #f5f7fa; font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+  .container { display: flex; justify-content: center; }
+</style>
+</head>
+<body>
+<div class="container">
+<svg width="1200" height="820" viewBox="0 0 1200 820" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0, 10 3.5, 0 7" fill="#aabbdd"/>
+  </marker>
+  <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+    <feDropShadow dx="0" dy="2" stdDeviation="5" flood-color="#00000015"/>
+  </filter>
+  <filter id="shadow-md" x="-10%" y="-10%" width="125%" height="140%">
+    <feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="#00000022"/>
+  </filter>
+  <linearGradient id="grad-title" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#2255cc"/>
+    <stop offset="100%" stop-color="#7733cc"/>
+  </linearGradient>
+  <linearGradient id="grad-ask" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#3377ee"/>
+    <stop offset="100%" stop-color="#2255bb"/>
+  </linearGradient>
+  <linearGradient id="grad-interview" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#8844dd"/>
+    <stop offset="100%" stop-color="#6622aa"/>
+  </linearGradient>
+  <linearGradient id="grad-correct" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#dd6622"/>
+    <stop offset="100%" stop-color="#bb4400"/>
+  </linearGradient>
+  <linearGradient id="grad-context" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#22aa66"/>
+    <stop offset="100%" stop-color="#118844"/>
+  </linearGradient>
+  <linearGradient id="grad-subagent" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#cc4488"/>
+    <stop offset="100%" stop-color="#aa2266"/>
+  </linearGradient>
+  <linearGradient id="grad-resume" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#ee9922"/>
+    <stop offset="100%" stop-color="#cc7700"/>
+  </linearGradient>
+  <linearGradient id="grad-bottom" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#1a2a4a"/>
+    <stop offset="100%" stop-color="#2a1a4a"/>
+  </linearGradient>
+</defs>
+
+<!-- White background -->
+<rect width="1200" height="820" fill="#ffffff" rx="12"/>
+
+<!-- TITLE -->
+<rect x="10" y="10" width="1180" height="52" rx="10" fill="url(#grad-title)" filter="url(#shadow)"/>
+<text x="600" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#ffffff">有效对话与会话管理</text>
+<text x="600" y="54" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.8)">沟通方式决定结果质量 · Context 是核心约束 · 善用工具放大效率</text>
+
+
+<!-- ═══ ROW 1: 3 cards top ═══ -->
+
+<!-- CARD 1: 提问代码库 x=18, w=360 -->
+<rect x="18" y="80" width="360" height="330" rx="12" fill="#ffffff" stroke="#c8d8f8" stroke-width="1.5" filter="url(#shadow-md)"/>
+<rect x="18" y="80" width="360" height="46" rx="12" fill="url(#grad-ask)"/>
+<rect x="18" y="112" width="360" height="14" fill="url(#grad-ask)"/>
+<circle cx="42" cy="103" r="13" fill="rgba(255,255,255,0.2)"/>
+<text x="42" y="108" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">1</text>
+<text x="198" y="99" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">提问代码库</text>
+<text x="198" y="116" text-anchor="middle" font-size="9.5" fill="rgba(255,255,255,0.85)">像问资深工程师一样问 Claude</text>
+<circle cx="198" cy="175" r="32" fill="#eef3ff" stroke="#b8ccf0" stroke-width="1.5"/>
+<text x="198" y="189" text-anchor="middle" font-size="28">💬</text>
+<text x="198" y="228" text-anchor="middle" font-size="10.5" fill="#334477">日志如何工作？</text>
+<text x="198" y="244" text-anchor="middle" font-size="10.5" fill="#334477">如何创建新的 API 端点？</text>
+<text x="198" y="260" text-anchor="middle" font-size="10.5" fill="#334477">foo.rs:134 的 async move 做什么？</text>
+<text x="198" y="276" text-anchor="middle" font-size="10.5" fill="#334477">为什么第 333 行调用 foo() 而非 bar()？</text>
+<rect x="30" y="290" width="334" height="108" rx="8" fill="#1e1e2e"/>
+<text x="46" y="308" font-size="8.5" font-family="'Courier New',monospace" fill="#6c7086"># 直接提问，无需特殊提示</text>
+<text x="46" y="324" font-size="8.5" font-family="'Courier New',monospace" fill="#cba6f7">CustomerOnboardingFlowImpl</text>
+<text x="46" y="340" font-size="8.5" font-family="'Courier New',monospace" fill="#cba6f7">  处理哪些边界情况？</text>
+<text x="46" y="356" font-size="8.5" font-family="'Courier New',monospace" fill="#a6e3a1">→ 有效入职工作流</text>
+<text x="46" y="372" font-size="8.5" font-family="'Courier New',monospace" fill="#a6e3a1">→ 减少对其他工程师的负担</text>
+
+<!-- CARD 2: 让 Claude 采访你 x=398, w=360 -->
+<rect x="398" y="80" width="360" height="330" rx="12" fill="#ffffff" stroke="#c8b8f0" stroke-width="1.5" filter="url(#shadow-md)"/>
+<rect x="398" y="80" width="360" height="46" rx="12" fill="url(#grad-interview)"/>
+<rect x="398" y="112" width="360" height="14" fill="url(#grad-interview)"/>
+<circle cx="422" cy="103" r="13" fill="rgba(255,255,255,0.2)"/>
+<text x="422" y="108" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">2</text>
+<text x="578" y="99" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">让 Claude 采访你</text>
+<text x="578" y="116" text-anchor="middle" font-size="9.5" fill="rgba(255,255,255,0.85)">大功能先采访，再开新会话执行</text>
+<circle cx="578" cy="175" r="32" fill="#f5f0ff" stroke="#c8b8f0" stroke-width="1.5"/>
+<text x="578" y="189" text-anchor="middle" font-size="28">🎤</text>
+<text x="578" y="228" text-anchor="middle" font-size="10.5" fill="#334477">技术实现 · UI/UX · 边界情况</text>
+<text x="578" y="244" text-anchor="middle" font-size="10.5" fill="#334477">权衡取舍 · 你没想到的硬问题</text>
+<text x="578" y="260" text-anchor="middle" font-size="10.5" fill="#334477">采访完成 → 写入 SPEC.md</text>
+<text x="578" y="276" text-anchor="middle" font-size="10.5" fill="#334477">新会话 + 干净 context 执行规范</text>
+<rect x="410" y="290" width="334" height="108" rx="8" fill="#1e1e2e"/>
+<text x="426" y="308" font-size="8.5" font-family="'Courier New',monospace" fill="#6c7086"># 采访提示模板</text>
+<text x="426" y="324" font-size="8" font-family="'Courier New',monospace" fill="#cba6f7">I want to build [brief description].</text>
+<text x="426" y="340" font-size="8" font-family="'Courier New',monospace" fill="#cba6f7">Interview me using AskUserQuestion.</text>
+<text x="426" y="356" font-size="8" font-family="'Courier New',monospace" fill="#89b4fa">Ask about edge cases, tradeoffs,</text>
+<text x="426" y="372" font-size="8" font-family="'Courier New',monospace" fill="#89b4fa">then write a complete spec to SPEC.md</text>
+
+<!-- CARD 3: 尽早纠偏 x=778, w=404 -->
+<rect x="778" y="80" width="404" height="330" rx="12" fill="#ffffff" stroke="#f0c8a8" stroke-width="1.5" filter="url(#shadow-md)"/>
+<rect x="778" y="80" width="404" height="46" rx="12" fill="url(#grad-correct)"/>
+<rect x="778" y="112" width="404" height="14" fill="url(#grad-correct)"/>
+<circle cx="802" cy="103" r="13" fill="rgba(255,255,255,0.2)"/>
+<text x="802" y="108" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">3</text>
+<text x="980" y="99" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">尽早且经常纠偏</text>
+<text x="980" y="116" text-anchor="middle" font-size="9.5" fill="rgba(255,255,255,0.85)">紧密反馈循环 · 偏离立即打断</text>
+<circle cx="980" cy="175" r="32" fill="#fff4ee" stroke="#f0c8a8" stroke-width="1.5"/>
+<text x="980" y="189" text-anchor="middle" font-size="28">🎯</text>
+<!-- 4 shortcut pills -->
+<rect x="800" y="218" width="168" height="26" rx="6" fill="#fff0e8" stroke="#f0a060" stroke-width="1.2"/>
+<text x="884" y="235" text-anchor="middle" font-size="10" font-weight="bold" fill="#aa4400">Esc — 中途停止，保留 context</text>
+<rect x="980" y="218" width="190" height="26" rx="6" fill="#fff0e8" stroke="#f0a060" stroke-width="1.2"/>
+<text x="1075" y="235" text-anchor="middle" font-size="10" font-weight="bold" fill="#aa4400">Esc×2 / /rewind — 恢复检查点</text>
+<rect x="800" y="252" width="168" height="26" rx="6" fill="#fff0e8" stroke="#f0a060" stroke-width="1.2"/>
+<text x="884" y="269" text-anchor="middle" font-size="10" font-weight="bold" fill="#aa4400">"撤销那个" — 让 Claude 回滚</text>
+<rect x="980" y="252" width="190" height="26" rx="6" fill="#fff0e8" stroke="#f0a060" stroke-width="1.2"/>
+<text x="1075" y="269" text-anchor="middle" font-size="10" font-weight="bold" fill="#aa4400">/clear — 重置 context</text>
+<rect x="790" y="290" width="380" height="108" rx="8" fill="#1e1e2e"/>
+<text x="806" y="308" font-size="8.5" font-family="'Courier New',monospace" fill="#6c7086"># 同一问题纠偏 2 次以上 → 重新开始</text>
+<text x="806" y="324" font-size="8.5" font-family="'Courier New',monospace" fill="#f38ba8">长会话 + 失败方法 = 性能下降</text>
+<text x="806" y="340" font-size="8.5" font-family="'Courier New',monospace" fill="#a6e3a1">/clear + 更具体的提示 = 更好结果</text>
+<text x="806" y="356" font-size="8.5" font-family="'Courier New',monospace" fill="#89b4fa">干净会话 &gt; 长会话 + 累积纠偏</text>
+<text x="806" y="372" font-size="8.5" font-family="'Courier New',monospace" fill="#cba6f7">把学到的东西写进新提示</text>
+
+<!-- ═══ ROW 2: 3 cards bottom ═══ -->
+
+<!-- CARD 4: 积极管理 Context x=18, w=360 -->
+<rect x="18" y="430" width="360" height="340" rx="12" fill="#ffffff" stroke="#a8d8b8" stroke-width="1.5" filter="url(#shadow-md)"/>
+<rect x="18" y="430" width="360" height="46" rx="12" fill="url(#grad-context)"/>
+<rect x="18" y="462" width="360" height="14" fill="url(#grad-context)"/>
+<circle cx="42" cy="453" r="13" fill="rgba(255,255,255,0.2)"/>
+<text x="42" y="458" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">4</text>
+<text x="198" y="449" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">积极管理 Context</text>
+<text x="198" y="466" text-anchor="middle" font-size="9.5" fill="rgba(255,255,255,0.85)">Context 是核心约束，主动控制</text>
+<circle cx="198" cy="522" r="32" fill="#eefff4" stroke="#a8d8b8" stroke-width="1.5"/>
+<text x="198" y="536" text-anchor="middle" font-size="28">🧹</text>
+<!-- command pills -->
+<rect x="30" y="564" width="155" height="22" rx="5" fill="#e8f8ee" stroke="#88cc99" stroke-width="1"/>
+<text x="107" y="579" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#116633">/clear — 完全重置</text>
+<rect x="195" y="564" width="171" height="22" rx="5" fill="#e8f8ee" stroke="#88cc99" stroke-width="1"/>
+<text x="280" y="579" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#116633">/compact — 压缩保留关键</text>
+<rect x="30" y="592" width="155" height="22" rx="5" fill="#e8f8ee" stroke="#88cc99" stroke-width="1"/>
+<text x="107" y="607" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#116633">/btw — 不进历史的问答</text>
+<rect x="195" y="592" width="171" height="22" rx="5" fill="#e8f8ee" stroke="#88cc99" stroke-width="1"/>
+<text x="280" y="607" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#116633">Esc×2 → 从此处总结</text>
+<rect x="30" y="622" width="334" height="136" rx="8" fill="#1e1e2e"/>
+<text x="46" y="640" font-size="8.5" font-family="'Courier New',monospace" fill="#6c7086"># CLAUDE.md 自定义压缩行为</text>
+<text x="46" y="656" font-size="8" font-family="'Courier New',monospace" fill="#cba6f7">When compacting, always preserve</text>
+<text x="46" y="672" font-size="8" font-family="'Courier New',monospace" fill="#cba6f7">  the full list of modified files</text>
+<text x="46" y="688" font-size="8" font-family="'Courier New',monospace" fill="#cba6f7">  and any test commands</text>
+<text x="46" y="704" font-size="8.5" font-family="'Courier New',monospace" fill="#a6e3a1">/compact Focus on the API changes</text>
+<text x="46" y="720" font-size="8.5" font-family="'Courier New',monospace" fill="#89b4fa"># 精确控制保留哪些 context</text>
+
+<!-- CARD 5: Subagents 调查 x=398, w=360 -->
+<rect x="398" y="430" width="360" height="340" rx="12" fill="#ffffff" stroke="#f0b8d8" stroke-width="1.5" filter="url(#shadow-md)"/>
+<rect x="398" y="430" width="360" height="46" rx="12" fill="url(#grad-subagent)"/>
+<rect x="398" y="462" width="360" height="14" fill="url(#grad-subagent)"/>
+<circle cx="422" cy="453" r="13" fill="rgba(255,255,255,0.2)"/>
+<text x="422" y="458" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">5</text>
+<text x="578" y="449" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">Subagents 调查</text>
+<text x="578" y="466" text-anchor="middle" font-size="9.5" fill="rgba(255,255,255,0.85)">独立 context 探索，主对话保持干净</text>
+<circle cx="578" cy="522" r="32" fill="#fff0f6" stroke="#f0b8d8" stroke-width="1.5"/>
+<text x="578" y="536" text-anchor="middle" font-size="28">🤖</text>
+<text x="578" y="572" text-anchor="middle" font-size="10.5" fill="#334477">subagent 读大量文件</text>
+<text x="578" y="588" text-anchor="middle" font-size="10.5" fill="#334477">只把摘要返回主对话</text>
+<text x="578" y="604" text-anchor="middle" font-size="10.5" fill="#334477">实现后也可用 subagent 验证</text>
+<rect x="410" y="622" width="334" height="136" rx="8" fill="#1e1e2e"/>
+<text x="426" y="640" font-size="8.5" font-family="'Courier New',monospace" fill="#6c7086"># 委托研究</text>
+<text x="426" y="656" font-size="8" font-family="'Courier New',monospace" fill="#cba6f7">Use subagents to investigate how</text>
+<text x="426" y="672" font-size="8" font-family="'Courier New',monospace" fill="#cba6f7">  our auth handles token refresh,</text>
+<text x="426" y="688" font-size="8" font-family="'Courier New',monospace" fill="#cba6f7">  and any existing OAuth utilities.</text>
+<text x="426" y="704" font-size="8.5" font-family="'Courier New',monospace" fill="#a6e3a1"># 实现后验证</text>
+<text x="426" y="720" font-size="8" font-family="'Courier New',monospace" fill="#89b4fa">use a subagent to review this code</text>
+<text x="426" y="736" font-size="8" font-family="'Courier New',monospace" fill="#89b4fa">  for edge cases</text>
+
+<!-- CARD 6: 恢复会话 x=778, w=404 -->
+<rect x="778" y="430" width="404" height="340" rx="12" fill="#ffffff" stroke="#f0d898" stroke-width="1.5" filter="url(#shadow-md)"/>
+<rect x="778" y="430" width="404" height="46" rx="12" fill="url(#grad-resume)"/>
+<rect x="778" y="462" width="404" height="14" fill="url(#grad-resume)"/>
+<circle cx="802" cy="453" r="13" fill="rgba(255,255,255,0.2)"/>
+<text x="802" y="458" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">6</text>
+<text x="980" y="449" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">检查点与恢复会话</text>
+<text x="980" y="466" text-anchor="middle" font-size="9.5" fill="rgba(255,255,255,0.85)">每次操作自动检查点 · 跨会话持久</text>
+<circle cx="980" cy="522" r="32" fill="#fff8ee" stroke="#f0d898" stroke-width="1.5"/>
+<text x="980" y="536" text-anchor="middle" font-size="28">⏪</text>
+<!-- rewind options -->
+<rect x="800" y="564" width="175" height="22" rx="5" fill="#fff4e0" stroke="#f0b840" stroke-width="1"/>
+<text x="887" y="579" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#7a4400">仅恢复对话</text>
+<rect x="985" y="564" width="175" height="22" rx="5" fill="#fff4e0" stroke="#f0b840" stroke-width="1"/>
+<text x="1072" y="579" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#7a4400">仅恢复代码</text>
+<rect x="800" y="592" width="175" height="22" rx="5" fill="#fff4e0" stroke="#f0b840" stroke-width="1"/>
+<text x="887" y="607" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#7a4400">恢复两者</text>
+<rect x="985" y="592" width="175" height="22" rx="5" fill="#fff4e0" stroke="#f0b840" stroke-width="1"/>
+<text x="1072" y="607" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#7a4400">从此处总结</text>
+<rect x="790" y="622" width="380" height="136" rx="8" fill="#1e1e2e"/>
+<text x="806" y="640" font-size="8.5" font-family="'Courier New',monospace" fill="#6c7086"># 跨会话恢复</text>
+<text x="806" y="656" font-size="8.5" font-family="'Courier New',monospace" fill="#a6e3a1">claude --continue   # 继续最近会话</text>
+<text x="806" y="672" font-size="8.5" font-family="'Courier New',monospace" fill="#a6e3a1">claude --resume     # 选择历史会话</text>
+<text x="806" y="688" font-size="8.5" font-family="'Courier New',monospace" fill="#cba6f7">/rename oauth-migration  # 命名会话</text>
+<text x="806" y="704" font-size="8.5" font-family="'Courier New',monospace" fill="#6c7086"># 像分支一样管理会话</text>
+<text x="806" y="720" font-size="8.5" font-family="'Courier New',monospace" fill="#f38ba8">⚠ 检查点不跟踪外部进程</text>
+<text x="806" y="736" font-size="8.5" font-family="'Courier New',monospace" fill="#f38ba8">⚠ 不是 git 的替代品</text>
+
+<!-- ═══ BOTTOM STRIP ═══ -->
+<rect x="10" y="782" width="1180" height="28" rx="10" fill="url(#grad-bottom)" filter="url(#shadow)"/>
+<text x="600" y="801" text-anchor="middle" font-size="11" font-weight="bold" fill="#cba6f7">核心原则：Context 是约束 · 紧密反馈循环 · 干净会话 + 精确提示 &gt; 长会话 + 累积纠偏</text>
+</svg>
+</div>
+</body>
+</html>
